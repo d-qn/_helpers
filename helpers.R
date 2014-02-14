@@ -313,6 +313,10 @@ slopegraphOld <- function(
 	rescaleByColumn = T,
 	...)
 {
+	## TODO
+	## check col.lines, lty, lwd are the same length as df
+
+
     if(ncol(df) < 2)
         stop('`df` must have at least two columns')
     # draw margins
@@ -350,21 +354,22 @@ slopegraphOld <- function(
     # numeric value labels
     # deal with duplicate value labels (i.e., not double printing anything)
     df2 <- do.call(cbind,lapply(df, function(y) {y[duplicated(y)] <- ''; y}))
+
     # print them
     apply(cbind(df.rescale,df2),1, function(y)
   		  text(1:ncol(df), as.numeric(y[1:ncol(df)]), y[(ncol(df)+1):(2*ncol(df))],
-              col=col.num, cex=cex.num, font=font.num)
+              col = col.num, cex = cex.num, font = font.num)
     )
     # draw lines
     col.lines <- if(length(col.lines == 1)) rep(col.lines, length.out=nrow(df)) else col.lines
-    lty <- rep(lty, length.out = nrow(df))
-    lwd <- rep(lwd, length.out=nrow(df))
+    lty <- if(length(lty == 1)) rep(lty, length.out = nrow(df)) else lty
+    lwd <- if(length(lwd == 1)) rep(lwd, length.out = nrow(df)) else lwd
 
     for(i in 1:nrow(df.rescale)){
         mapply(function(x1,y1,x2,y2,...){
             ysloped <- (y2-y1)*offset.x
-            segments(x1+offset.x, if(y1==y2) y1 else (y1+ysloped),
-                     x2-offset.x, if(y1==y2) y2 else (y2-ysloped),
+            segments(x1 + offset.x, if(y1==y2) y1 else (y1+ysloped),
+                     x2 - offset.x, if(y1==y2) y2 else (y2-ysloped),
                      col=col.lines[i],
                      lty=lty[i],
                      lwd=lwd[i]
