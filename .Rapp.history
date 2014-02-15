@@ -204,36 +204,43 @@ mai = NULL,#
 cancer <- read.csv('tufte-cancer-survival-data.csv')#
 rownames(cancer) <- cancer[,1]#
 cancer <- cancer [,-1]
-setwd('/Users/dqn/Google Drive/swissinfo/2014_01_06 genderQuotas')
-source("~/swissinfo/_helpers/helpers.R")
-font_install()
-font
-?loadfonts
-slopegraphOld
-setwd('/Users/dqn/Google Drive/swissinfo/2014_01_06 genderQuotas')
-source("~/swissinfo/_helpers/helpers.R")#
-#
-font #
-#
-# subset of countries to plot#
-countries <- c('Finland', 'France', 'Germany', 'Italy', 'Norway', 'Portugal',#
-	'Spain', 'Sweden', 'Switzerland', 'United Kingdom', 'Europe Overall')#
-#
-data <- read.csv2 ("womenInBoard.csv", stringsAsFactors = F)#
-colnames(data) <- gsub("^X", "", colnames(data))#
-country <- data[,1]#
-#
-data <- do.call(cbind, lapply(data[,-1], function(i) round(as.numeric(i))))#
-rownames(data) <- country#
-slopegraphOld(as.data.frame(data[match(countries, rownames(data)),-c(1)]), rescaleByColumn = F, #
-	col.line='grey', cex.lab = 0.6, cex.num = 0.6, offset.x = 0.07, main = "Trends in Percentage of Board Positions held by Women")
-setwd('/Users/dqn/Google Drive/swissinfo/2014_01_06 genderQuotas')
-slopegraphOld(as.data.frame(data[match(countries, rownames(data)),-c(1)]), rescaleByColumn = F, #
-	col.line='grey', cex.lab = 0.6, cex.num = 0.6, offset.x = 0.07, main = "Trends in Percentage of Board Positions held by Women", col.xaxt = NULL)
-?plot
-??xaxt
-names(data)
-names(as.data.frame(data[match(countries, rownames(data)),-c(1)])
+require(devtools)#
+install_github('ramnathv/rCharts@dev')#
+install_github('ramnathv/rMaps')
+library(rMaps)#
+crosslet(#
+  x = "country", #
+  y = c("web_index", "universal_access", "impact_empowerment", "freedom_openness"),#
+  data = web_index#
 )
+ichoropleth(Crime ~ State, data = subset(violent_crime, Year == 2010))
+ichoropleth(Crime ~ State, data = violent_crime, animate = "Year")
+ichoropleth(Crime ~ State, data = violent_crime, animate = "Year", play = TRUE)
+map <- Leaflet$new()#
+map$setView(c(51.505, -0.09), zoom = 13)#
+map$tileLayer(provider = 'Stamen.Watercolor')#
+map$marker(#
+  c(51.5, -0.09),#
+  bindPopup = 'Hi. I am a popup'#
+)#
+map
+?as.POSIXct
+quarters.Date
+'quarters.Date
+?quarters.Date
+setwd('/Users/dqn/Google Drive/swissinfo/2014_02_13 emploiEtranger')
+source("~/swissinfo/_helpers/helpers.R")#
+test <- data.frame(x = 1:10, y = c(-5:-1, c(11,11,11, 15,15)), z = c(2,2,2, 4:7, 9,9,9), row.names = letters[1:10])#
+test.col <- rep(c("green", "red", "blue", "green", "blue"), 2)#
+slopegraphOld(test, rescaleByColumn = F, col.line=test.col, col.lab=test.col, , cex.lab = 0.6, cex.num = 0.6, offset.x = 0.05)
 setwd('/Users/dqn/Google Drive/swissinfo/_helpers')
-par('fg')
+lab.dup <- sapply(leftlabs, length) > 1
+lab.dup
+setwd('/Users/dqn/Google Drive/swissinfo/_helpers')
+text(1 - offset.lab, as.numeric(names(leftlabs)[!lab.dup]),#
+         col=col.lab[!duplicated(l)], leftlabs[!lab.dup], pos=leftlabs, cex=cex.lab, font=font.lab)
+setwd('/Users/dqn/Google Drive/swissinfo/_helpers')
+as.numeric(names(leftlabs)[!lab.dup])
+setwd('/Users/dqn/Google Drive/swissinfo/_helpers')
+col=col.lab[!duplicated(l)]
+col
