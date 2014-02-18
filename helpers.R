@@ -52,240 +52,14 @@ formatShp <- function(shpF) {
 	shpF.df
 }
 
-
-
-############################################################################################
-###    Slopegraph from https://github.com/jkeirstead/r-slopegraph
-############################################################################################
-
-
-##' EXAMPLE
-# test <- data.frame(group = factor(rep(letters[1:5], 3)), x = rep(c(2008, 2010, 2012), 5), value = 1:15)
-#
-# #Convert raw data to right format
-# df <- build_slopegraph(test, x="x", y="value", group="group", method="tufte", min.space=0.05)
-#
-# # Refactor the x-axis to get the right labels, round the y values for presentation
-# df <- transform(df, x=factor(x),y=round(y))
-# plot_slopegraph(df) + labs(title="Test")
-
-
-##' @title R script for creating slopegraphs
-##' @author James Keirstead
-##' 12 December 2013
-##' http://www.jameskeirstead.ca/r/slopegraphs-in-r/
-
-##' Build a slopegraph data set
-##'
-##' Modifies a data frame so that it can be used for plotting by
-##' \code{plot_slopegraph}.  The general structure of a slopegraph is
-##' \itemize{
-##' \item a factor giving the group labels
-##' \item an ordered factor giving the x intervals
-##' \item a numeric giving the y values
-##' }
-##'
-##' @param df the raw data frame
-##' @param x a character giving the name of the x-axis column.  This
-##' column must be an ordered factor.
-##' @param y a character giving the name of the y-axis column.  This
-##' column must be a numeric.
-##' @param group a character giving the name of the group column.
-##' This column must be a factor.
-##' @param method a character string indicating which method to use to
-##' calculate the position of elements.  Values include "tufte"
-##' (default), "spaced", "rank", "none".
-##' @param min.space fraction of total data range to leave as a
-##' minimum gap (default = 0.05, only used by methods \code{spaced}
-##' and \code{tufte})
-##' @details The \code{method} option allows the y-position of the
-##' elements to be calculated using different assumptions.  These are:
-##' \itemize{ \item \code{tufte} Values in the first x-column are
-##' sorted based on their numeric value.  Subsequent group lines are
-##' then shifted to ensure that the lines for two adjacent groups
-##' never cross.  Vertical positions in subsequent columns are only
-##' meaningful relative to the first entry in that group.  \item
-##' \code{spaced} The vertical position of each element is chosen to
-##' ensure a minimum spacing between all elements and preserving the
-##' rank order within columns.  Group lines can cross.  \item
-##' \code{rank} The vertical position of each element represents its
-##' rank within the column.  \item \code{none} The vertical position
-##' of each element is based solely on its value }
-##' @return a data frame with labelled columns, group, x, y, and ypos
-build_slopegraph <- function(df, x, y, group, method="tufte", min.space=0.05) {
-
-    ## First rename the columns for consistency
-    ids <- match(c(x, y, group), names(df))
-    df <- df[,ids]
-    names(df) <- c("x", "y", "group")
-
-    ## Expand grid to ensure every combination has a defined value
-    tmp <- expand.grid(x=unique(df$x), group=unique(df$group))
-    tmp <- merge(df, tmp, all.y=TRUE)
-    df <- mutate(tmp, y=ifelse(is.na(y), 0, y))
-
-    ## Then select and apply the appropriate method
-    if (method=="spaced") {
-        df <- spaced_sort(df, min.space=min.space)
-        return(df)
-    } else if (method=="none") {
-        df <- mutate(df, ypos=y)
-        return(df)
-    } else if (method=="rank") {
-        df <- ddply(df, .(x), summarize, x=x, y=y, group=group, ypos=rank(y))
-        return(df)
-    } else if (method=="tufte") {
-        df <- tufte_sort(df, min.space=min.space)
-        return(df)
-    } else {
-        template <- "Method '%s' currently unsupported."
-        warning(sprintf(template, method))
-    }
-}
-
-##' Spaced sort for slopegraphs
-##'
-##' Calculates the position of each element to ensure a minimum
-##' space between adjacent entries within a column, while preserving
-##' rank order.  Group lines can cross
-##' @param df the raw data frame
-##' @param min.space fraction of total data range to leave as a
-##' minimum gap
-##' @return a data frame with the ypos column added
-spaced_sort <- function(df, min.space=0.05) {
-    ## Define a minimum spacing (5% of full data range)
-    min.space <- min.space*diff(range(df$y))
-
-    ## Transform the data
-    df <- ddply(df, .(x), calc_spaced_offset, min.space)
-    return(df)
-}
-
-##' Calculates the vertical offset between successive data points
-##'
-##' @param df a data frame representing a single year of data
-##' @param min.space the minimum spacing between y values
-##' @return a data frame
-calc_spaced_offset <- function(df, min.space) {
-
-    ## Sort by value
-    ord <- order(df$y, decreasing=T)
-    ## Calculate the difference between adjacent values
-    delta <- -1*diff(df$y[ord])
-    ## Adjust to ensure that minimum space requirement is met
-    offset <- (min.space - delta)
-    offset <- replace(offset, offset<0, 0)
-    ## Add a trailing zero for the lowest value
-    offset <- c(offset, 0)
-    ## Calculate the offset needed to be added to each point
-    ## as a cumulative sum of previous values
-    offset <- rev(cumsum(rev(offset)))
-    ## Assemble and return the new data frame
-    df.new <- data.frame(group=df$group[ord],
-                         x=df$x[ord],
-                         y=df$y[ord],
-                         ypos=offset+df$y[ord])
-  return(df.new)
-}
-
-
-##' Calculates slope graph positions based on Edward Tufte's layout
-##'
-##' @param df the raw data frame with named x, y, and group columns
-##' @param min.space fraction of total data range to leave as a
-##' minimum gap
-##' @return a data frame with an additional calculate ypos column
-tufte_sort <- function(df, min.space=0.05) {
-
-    ## Cast into a matrix shape and arrange by first column
-    require(reshape2)
-    tmp <- dcast(df, group ~ x, value.var="y")
-    ord <- order(tmp[,2])
-    tmp <- tmp[ord,]
-
-    min.space <- min.space*diff(range(tmp[,-1]))
-    yshift <- numeric(nrow(tmp))
-    ## Start at "bottom" row
-    ## Repeat for rest of the rows until you hit the top
-    for (i in 2:nrow(tmp)) {
-        ## Shift subsequent row up by equal space so gap between
-        ## two entries is >= minimum
-        mat <- as.matrix(tmp[(i-1):i, -1])
-        d.min <- min(diff(mat))
-        yshift[i] <- ifelse(d.min < min.space, min.space - d.min, 0)
-    }
-
-    tmp <- cbind(tmp, yshift=cumsum(yshift))
-
-    scale <- 1
-    tmp <- melt(tmp, id=c("group", "yshift"), variable.name="x", value.name="y")
-    ## Store these gaps in a separate variable so that they can be scaled ypos = a*yshift + y
-
-    tmp <- transform(tmp, ypos=y + scale*yshift)
-    return(tmp)
-
-}
-
-
-##' A theme for plotting slopegraphs
-##'
-##' @param base_size a numeric giving the base font size
-##' @param base_family a string giving the base font family
-##' @import grid
-theme_slopegraph <- function (base_size = 12, base_family = "") {
-    require(grid)
-    theme(axis.line = element_blank(),
-          axis.text = element_text(colour="black"),
-          axis.text.x = element_text(size = rel(1), lineheight = 0.9,
-              vjust = 1),
-          axis.text.y = element_text(size=rel(0.8)),
-          axis.ticks = element_blank(),
-          axis.title.x = element_blank(),
-          axis.title.y = element_blank(),
-          axis.ticks.length = unit(0, "lines"),
-          axis.ticks.margin = unit(0, "lines"),
-          panel.background = element_blank(),
-          panel.border = element_blank(),
-          panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
-          panel.margin = unit(0.25, "lines"),
-          strip.background = element_blank(),
-          strip.text.x = element_text(size = rel(0.8)),
-          strip.text.y = element_blank(),
-          plot.background = element_blank(),
-          plot.title = element_text(size = rel(1)),
-          plot.margin = unit(c(1, 0.5, 0.5, 0.5), "lines"),
-          complete=FALSE)
-}
-
-
-##' Plots a slopegraph
-##'
-##' @param df a data frame giving the data
-##' @return a ggplot object
-##' @import ggplot2
-plot_slopegraph <- function(df, colour = "grey80") {
-    ylabs <- subset(df, x==head(x,1))$group
-    yvals <- subset(df, x==head(x,1))$ypos
-    fontSize <- 2.5
-    gg <- ggplot(df,aes(x=x,y=ypos)) +
-        geom_line(aes(group=group),colour=colour) +
-        geom_point(colour="white",size=8) +
-        geom_text(aes(label=y),size=fontSize) +
-        scale_y_continuous(name="", breaks=yvals, labels=ylabs)
-    gg.form <- gg + theme_slopegraph()
-    return(gg.form)
-}
-
-
 ############################################################################################
 ###    Slopegraph from https://gist.github.com/leeper/7158678
 ############################################################################################
 
 
-slopegraphOld <- function(
+slopegraph <- function(
 	df,
-	xlim = c(-0,ncol(df)+1),
+	xlim = c(0.5,ncol(df)+0.5),
 	ylim = c(min(df)-diff(range(df))/100,max(df)+diff(range(df))/100),
 	main = NULL,
 	bty = 'n',
@@ -320,13 +94,13 @@ slopegraphOld <- function(
     col.lines <- if(length(col.lines == 1)) rep(col.lines, length.out=nrow(df)) else col.lines
     lty 	  <- if(length(lty == 1)) rep(lty, length.out = nrow(df)) else lty
     lwd       <- if(length(lwd == 1)) rep(lwd, length.out = nrow(df)) else lwd
-	col.lab <- if(length(col.lab == 1)) rep(col.lab, length.out=nrow(df)) else col.lab
+	col.lab   <- if(length(col.lab == 1)) rep(col.lab, length.out=nrow(df)) else col.lab
 
     if(ncol(df) < 2)
         stop('`df` must have at least two columns')
     # draw margins
     if(is.null(mai))
-        par(mai=c(1, 0, if(is.null(main)) 0 else 1, 0))
+        par(mai=c(1, 0, 1, 0))
     else
         par(mai=mai)
 
@@ -336,7 +110,7 @@ slopegraphOld <- function(
     if(!is.null(add.exp))
         eval(add.exp)
     # x-axis
-    axis(1, 1:ncol(df), labels = labels, col=col.xaxt, col.ticks=col.xaxt, lwd = 0, lwd.ticks = 0)
+    axis(3, 1:ncol(df), labels = labels, col=col.xaxt, col.ticks=col.xaxt, lwd = 0, lwd.ticks = 0, cex.axis = cex.lab)
 
 	if(rescaleByColumn) {
     	range.bycol <- sapply(df, function(c) diff(range(c, na.rm = T)))
@@ -352,8 +126,9 @@ slopegraphOld <- function(
     lab.dup <- sapply(leftlabs, length) > 1
     # print text for no labels on the same row
 	text(1 - offset.lab, as.numeric(names(leftlabs)[!lab.dup]),
-         col=col.lab[!duplicated(l)], leftlabs[!lab.dup], pos=labpos.left, cex=cex.lab, font=font.lab)
+         col=col.lab[match(as.numeric(names(leftlabs)[!lab.dup]), l)], leftlabs[!lab.dup], pos=labpos.left, cex=cex.lab, font=font.lab)
 	# print multiple labels on the same row
+
 	sapply(as.numeric(names(lab.dup)[lab.dup]), function(pos) {
 		idx <- l == pos
 		text(c(1 - offset.lab, 1:(sum(idx)-1) * -lab.sep + (1 - offset.lab)),
@@ -366,10 +141,12 @@ slopegraphOld <- function(
     #rightlabs <- lapply(split(rownames(df.rescale),r), paste, collapse=collapse.label)
     rightlabs <- lapply(split(rownames(df.rescale),r), paste, collapse.label, sep="")
     lab.dup <- sapply(rightlabs, length) > 1
+
     # print text for no labels on the same row
 	text(ncol(df)+offset.lab, as.numeric(names(rightlabs)[!lab.dup]),
-         col=col.lab[!duplicated(r)], rightlabs[!lab.dup], pos=labpos.right, cex=cex.lab, font=font.lab)
+         col=col.lab[match(as.numeric(names(rightlabs)[!lab.dup]), r)], rightlabs[!lab.dup], pos=labpos.right, cex=cex.lab, font=font.lab)
 	# print multiple labels on the same row
+
 	sapply(as.numeric(names(lab.dup)[lab.dup]), function(pos) {
 		idx <- r == pos
 		text(c(ncol(df) + offset.lab, 1:(sum(idx)-1) * lab.sep + (ncol(df) + offset.lab)),
@@ -408,10 +185,94 @@ slopegraphOld <- function(
 
 # EXAMPLE
 # test <- data.frame(x = 1:10, y = c(-5:-1, 11:15), z = 1:10, row.names = letters[1:10])
-# slopegraphOld(test, rescaleByColumn = F, col.line='red', cex.lab = 0.6, cex.num = 0.6, offset.x = 0.05, xlim = c(-0.5, 3.5))
-# slopegraphOld(test, rescaleByColumn = T)
+# slopegraph(test, rescaleByColumn = F, col.line='red', cex.lab = 0.6, cex.num = 0.6, offset.x = 0.05, xlim = c(-0.5, 3.5))
+# slopegraph(test, rescaleByColumn = T)
 # test <- data.frame(x = 1:10, y = c(-5:-1, c(11,11,11, 15,15)), z = c(2,2,2, 4:7, 9,9,9), row.names = letters[1:10])
 # test.col <- rep(c("green", "red", "blue", "green", "blue"), 2)
-# slopegraphOld(test, rescaleByColumn = F, col.line=test.col, col.lab=test.col, , cex.lab = 0.6, cex.num = 0.6, offset.x = 0.05)
+# slopegraph(test, rescaleByColumn = F, col.line=test.col, col.lab=test.col, , cex.lab = 0.6, cex.num = 0.6, offset.x = 0.05, lab.sep = 0.2)
+
+
+
+
+
+
+############################################################################################
+###    http://flowingdata.com/2013/06/03/how-to-make-slopegraphs-in-r/
+############################################################################################
+
+slopegraph2 <- function(startpts, endpts, labels) {
+
+	x0 <- c()
+	y0 <- c()
+	x1 <- c()
+	y1 <- c()
+
+	startyear <- 1970
+	stopyear <- 1979
+	xoffset <- 2
+	yoffset <- 0
+	ystartprev <- 0
+	ystopprev <- 0
+	ythreshold <- ( max(startpts) - min(startpts) ) * 0.025
+
+	for (i in length(startpts):1) {
+
+        ystartdiff <- (startpts[i]+yoffset) - ystartprev
+        if (abs(ystartdiff) < ythreshold) {
+            yoffset <- yoffset + (ythreshold-ystartdiff)
+        }
+
+        # Calculate slope
+        slope <- (endpts[i] - startpts[i]) / (stopyear - startyear)
+
+        # Intercept
+        intercept <- startpts[i] + yoffset
+
+        # Start and stop coordinates for lines
+        ystart <- intercept
+        ystop <- slope * (stopyear-startyear) + intercept
+        ystopdiff <- ystop - ystopprev
+        if (abs(ystopdiff) < ythreshold) {
+            yoffset <- yoffset + (ythreshold-ystopdiff)
+            intercept <- startpts[i] + yoffset
+            ystart <- intercept
+            ystop <- slope * (stopyear-startyear) + intercept
+        }
+
+        # Draw the line for current country
+        x0 <- c(x0, startyear)
+        y0 <- c(y0, ystart)
+        x1 <- c(x1, stopyear)
+        y1 <- c(y1, ystop)
+
+
+        ystartprev <- ystart
+        ystopprev <- ystop
+    }
+
+    ymin <- min(startpts)
+    ymax <- max(c(startpts, endpts)) + yoffset
+
+    par(family="serif", mar=c(0,0,0,0))
+    plot(0, 0, type="n", main="", xlab="", ylab="", xlim=c(1950,1990), ylim=c(ymin,ymax*1.1), bty="n", las=1, axes=FALSE)
+    segments(x0, y0, x1, y1)
+    text(x0, y0, rev(startpts), pos=2, cex=0.6)
+    text(x0-xoffset, y0, rev(labels), pos=2, cex=0.6)
+    text(x1, y1, rev(endpts), pos=4, cex=0.6)
+    text(x1+xoffset, y1, rev(labels), pos=4, cex=0.6)
+
+    # Year labels
+    text(startyear, ymax*1.1, deparse(substitute(startpts)), cex=0.7, pos=2, offset=1)
+    text(stopyear, ymax*1.1, deparse(substitute(endpts)), cex=0.7, pos=4, offset=0.5)
+}
+
+
+## EXAMPLE
+# pctgdp <- data.frame(country = factor(c("Sweden", "Netherlands", "Norway", "Britain", "France", "Germany", "Belgium",
+# 	"Canada", "Finland", "Italy","United States","Greece", "Switzerland", "Spain", "Japan")),
+# 	pct1970 = c(46.9,44,43.5,40.7,39,37.5,35.2,35.2,34.9,30.4,30.3,26.8,26.5,22.5,20.7),
+# 	pct1979 = c(57.4,55.8,52.2,39,43.4,42.9,43.2,35.8,38.2,35.7,32.5,30.6,33.2,27.1,26.6)
+# )
+# slopegraph2(pctgdp$pct1970, pctgdp$pct1979, pctgdp$country)
 
 
