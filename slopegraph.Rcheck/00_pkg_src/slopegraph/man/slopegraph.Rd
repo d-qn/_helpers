@@ -1,0 +1,78 @@
+\name{slopegraph}
+\alias{slopegraph}
+\title{Slopegraph chart}
+\usage{
+slopegraph(df, rescaleByColumn = T, xlim = c(0.5, ncol(df) + 0.5),
+  ylim = c(min(df) - diff(range(df))/100, max(df) + diff(range(df))/100),
+  main = NULL, yaxt = "n", xaxt = "n", xlab = "", ylab = "",
+  labels = names(df), labpos.left = 2, labpos.right = 4,
+  collapse.label = "  ", lab.sep = 0.75, col.lines = par("fg"),
+  col.lab = par("fg"), col.num = par("fg"), col.xaxt = par("fg"),
+  offset.x = 0.1, offset.lab = 0.1, cex.lab = 1, cex.num = 1,
+  font.lab = 1, font.num = 1, lty = par("lty"), lwd = par("lwd"),
+  mai = NULL, ...)
+}
+\arguments{
+  \item{df}{a data.frame that will be plotted as
+  slopegraph}
+
+  \item{rescaleByColumn,}{a logical of length 1, shall each
+  series of observations be normalized?}
+
+  \item{xlim,}{ylim vectors of length 2 which sets chart
+  area based on the data unit}
+
+  \item{main}{a character vector used as the plot title}
+
+  \item{yaxt,}{xaxt, xlab, ylab, passed on to
+  \code{\link{par}}}
+
+  \item{labels}{a character string, the labels to be
+  displayed for each slope lines}
+
+  \item{labpos.left,}{labpos.right a numeric of length 1,
+  the position on the x-axis for the labels}
+
+  \item{collapse.label}{a character, for colliding labels
+  at the same y the spacer to use}
+
+  \item{lab.sep}{a numeric of length 1, for colliding
+  labels the space in the x-axis unit}
+
+  \item{col.lines,}{col.lab vectors of length 1 or of
+  length df, specifying the line and label colors}
+
+  \item{col.num,}{col.xaxt vectors of length 1 specifying
+  the numerical value and x-axis colors}
+
+  \item{offset.x,}{offset.lab vectors of length 1
+  specifying in the x-axis unit the line to numerical value
+  and labels offsets.}
+
+  \item{cex.lab,}{cex.num vectors of length 1 specifying
+  the cex of axis and nuermical values, see \code{cex.axis}
+  and \code{cex} in \code{\link{par}}}
+
+  \item{font.lab,}{a vector of length 1 specifying the font
+  weight, as defined in \code{font} in \code{\link{par}}}
+
+  \item{lty,}{lwd vectors of length 1 or of length df
+  specifiyng the line type and width, see
+  \code{\link{par}}}
+
+  \item{mai,}{plot margin as defined in \code{\link{par}}}
+}
+\description{
+Plot a slopegraph chart
+}
+\examples{
+test <- data.frame(x = 1:10, y = c(-5:-1, 11:15), z = 1:10, row.names = letters[1:10])
+
+slopegraph(test, rescaleByColumn = F, col.line='red', cex.lab = 0.6, cex.num = 0.6, offset.x = 0.05, xlim = c(-0.5, 3.5))
+slopegraph(test, rescaleByColumn = T)
+
+test <- data.frame(x = 1:10, y = c(-5:-1, c(11,11,11, 15,15)), z = c(2,2,2, 4:7, 9,9,9), row.names = letters[1:10])
+test.col <- rep(c("green", "red", "blue", "green", "blue"), 2)
+slopegraph(test, rescaleByColumn = F, col.line=test.col, col.lab=test.col, , cex.lab = 0.6, cex.num = 0.6, offset.x = 0.05, lab.sep = 0.2)
+}
+

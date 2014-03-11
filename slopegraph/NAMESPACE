@@ -1,0 +1,3 @@
+export(slopegraph)
+export(slopegraph2)
+importFrom(scales,rescale)

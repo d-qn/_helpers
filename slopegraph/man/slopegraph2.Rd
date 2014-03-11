@@ -1,0 +1,27 @@
+\name{slopegraph2}
+\alias{slopegraph2}
+\title{Slopegraph charts}
+\usage{
+slopegraph2(startpts, endpts, labels)
+}
+\arguments{
+  \item{startpts,}{endpts numeric vectors of same length}
+
+  \item{labels}{a character vector of same length as
+  \code{startpts}}
+}
+\description{
+Plot a minimalistic Tuffte style slopegraph chart
+}
+\examples{
+pctgdp <- data.frame(country = factor(c("Sweden", "Netherlands", "Norway", "Britain", "France", "Germany", "Belgium",
+  "Canada", "Finland", "Italy","United States","Greece", "Switzerland", "Spain", "Japan")),
+	pct1970 = c(46.9,44,43.5,40.7,39,37.5,35.2,35.2,34.9,30.4,30.3,26.8,26.5,22.5,20.7),
+	pct1979 = c(57.4,55.8,52.2,39,43,43,43,35.8,38.2,35.7,32.5,30.6,33.2,27.1,26.6)
+)
+slopegraph2(pctgdp$pct1970, pctgdp$pct1979, pctgdp$country)
+}
+\references{
+http://flowingdata.com/2013/06/03/how-to-make-slopegraphs-in-r/
+}
+

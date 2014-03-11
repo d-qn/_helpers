@@ -1,0 +1,12 @@
+Package: slopegraph
+Title: slopegraph
+Version: 0.1
+Authors@R: "First Last <first.last@example.com> [aut, cre]"
+Description: What the package does (paragraph)
+Author: Duc-Quang Nguyen
+Maintainner: ducquang.nguyen@gmail.com
+Depends:
+    R (>= 3.0.2),
+    scales
+License: GNU
+LazyData: true
