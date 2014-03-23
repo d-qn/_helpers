@@ -20,6 +20,16 @@ ggtheme <- {
  )
 }
 
+ggtheme_ygrid <- {
+    #eliminates baground, gridlines, and chart border
+  theme_bw() + theme(
+   plot.background = element_blank(), panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank(),
+   panel.grid.minor.y = element_blank(),
+   panel.border = element_blank(), panel.background = element_blank()
+ )
+}
+
+
 ggtheme2 <- {
     #eliminates baground, gridlines, chart border and axis
   theme_bw() + theme(
@@ -28,6 +38,9 @@ ggtheme2 <- {
    axis.text = element_blank()
  )
 }
+
+
+colpal_qual <- c("#2D343C", "#C4C4C4", "#D62B22", "#131D26", "#131D26", "#4C1120", "#5C7964", "#DDCB8D", "#BB4E53")
 
 
 ############################################################################################
