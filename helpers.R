@@ -4,8 +4,9 @@ library(reshape)
 library(plyr)
 library(scales)
 library(extrafont)
+loadfonts(quiet = TRUE)
 require(gridExtra)
-suppressWarnings(loadfonts())
+
 
 
 ############################################################################################
