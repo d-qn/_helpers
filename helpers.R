@@ -3,6 +3,7 @@ library(RColorBrewer)
 library(reshape)
 library(plyr)
 library(scales)
+library(countrycode)
 library(extrafont)
 loadfonts(quiet = TRUE)
 require(gridExtra)
@@ -14,7 +15,7 @@ require(gridExtra)
 ############################################################################################
 
 ggtheme <- {
-    #eliminates baground, gridlines, and chart border
+    #based theme_bw eliminates baground, gridlines, and chart border
   theme_bw() + theme(
    plot.background = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
    panel.border = element_blank(), panel.background = element_blank()
@@ -22,11 +23,10 @@ ggtheme <- {
 }
 
 ggtheme_ygrid <- {
-    #eliminates baground, gridlines, and chart border
+    #based theme_bw eliminates baground, x gridlines and ticks, and chart border
   theme_bw() + theme(
    plot.background = element_blank(), panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank(),
-   panel.grid.minor.y = element_blank(),
-   panel.border = element_blank(), panel.background = element_blank()
+   panel.grid.minor.y = element_blank(), panel.background = element_blank()
  )
 }
 
@@ -48,9 +48,9 @@ colpal_qual <- c("#2D343C", "#C4C4C4", "#D62B22", "#131D26", "#131D26", "#4C1120
 ###   Path to swiss maps shapfiles
 ############################################################################################
 
-swissMapShp.path <- "~/swissinfo/swiss-maps/swiss-maps/shp/ch"
-swissMapShp2012.path <- "~/swissinfo/swiss-maps/swiss-maps/shp2012/ch"
-swissMapShp2010.path <- "~/swissinfo/swiss-maps/swiss-maps/shp2010/ch"
+swissMapShp.path <- "~/swissinfo/swiss-maps/shp2013/ch"
+swissMapShp2012.path <- "~/swissinfo/swiss-maps/shp2012/ch"
+swissMapShp2010.path <- "~/swissinfo/swiss-maps/shp2010/ch"
 
 
 ## Layers available: country, lakes, municipalities, districts, cantons
