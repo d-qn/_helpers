@@ -30,6 +30,13 @@ ggtheme_ygrid <- {
  )
 }
 
+ggtheme_xgrid <- {
+    #based theme_bw eliminates baground, x gridlines and ticks, and chart border
+  theme_bw() + theme(
+   plot.background = element_blank(), panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank(),
+   panel.grid.minor.x = element_blank(), panel.background = element_blank(), panel.border = element_blank()
+ )
+}
 
 ggtheme2 <- {
     #eliminates baground, gridlines, chart border and axis
@@ -42,7 +49,14 @@ ggtheme2 <- {
 
 
 colpal_qual <- c("#2D343C", "#C4C4C4", "#D62B22", "#131D26", "#131D26", "#4C1120", "#5C7964", "#DDCB8D", "#BB4E53")
+swi_22palette <- c("#336666", "#368596", "#669999", "#366096",
+	"#333366", "#666699", "#996699", "#663333",
+	"#ab3d3f", "#996666", "#ac673e", "#ac7f3e",
+	"#666633", "#999966", "#89a23a", "#3a9736",
+	"#aa8959", "#bfa681", "#d4c3aa", "#e5dbcd",
+	"#efe9e0", "#f7f5ed")
 
+swi_9palette <- swi_22palette[c(1, 4, 6, 8, 9, 11, 13, 17, 20)]
 
 ############################################################################################
 ###   Path to swiss maps shapfiles
