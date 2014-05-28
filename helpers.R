@@ -34,7 +34,7 @@ ggtheme_xgrid <- {
     #based theme_bw eliminates baground, x gridlines and ticks, and chart border
   theme_bw() + theme(
    plot.background = element_blank(), panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank(),
-   panel.grid.minor.x = element_blank(), panel.background = element_blank(), panel.border = element_blank()
+   panel.grid.minor.x = element_blank(), panel.background = element_blank()
  )
 }
 
