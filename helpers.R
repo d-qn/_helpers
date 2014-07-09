@@ -5,6 +5,8 @@ library(plyr)
 library(scales)
 library(countrycode)
 library(extrafont)
+library(magrittr)
+library(png)
 loadfonts(quiet = TRUE)
 require(gridExtra)
 
@@ -47,6 +49,7 @@ ggtheme2 <- {
  )
 }
 
+swi_logo <- readPNG("~/swissinfo/_helpers/SWI-RGB.png")
 
 colpal_qual <- c("#2D343C", "#C4C4C4", "#D62B22", "#131D26", "#131D26", "#4C1120", "#5C7964", "#DDCB8D", "#BB4E53")
 swi_22palette <- c("#336666", "#368596", "#669999", "#366096",
@@ -57,6 +60,14 @@ swi_22palette <- c("#336666", "#368596", "#669999", "#366096",
 	"#efe9e0", "#f7f5ed")
 
 swi_9palette <- swi_22palette[c(1, 4, 6, 8, 9, 11, 13, 17, 20)]
+
+############################################################################################
+###   Load files to transpose country and swiss cantons
+############################################################################################
+
+country_names <- read.csv("~/swissinfo/_helpers/countrynames.csv", sep =";")
+canton_names <- read.csv("~/swissinfo/_helpers/CantonCH_iso.csv")
+
 
 ############################################################################################
 ###   Path to swiss maps shapfiles
