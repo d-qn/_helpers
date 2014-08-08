@@ -36,7 +36,7 @@ slopegraph <- function(
   df,
   rescaleByColumn = T,
   xlim = c(0.5,ncol(df)+0.5),
-  ylim = c(min(df)-diff(range(df))/100,max(df)+diff(range(df))/100),
+  ylim = c(min(df, na.rm = T)-diff(range(df, na.rm = T))/100,max(df, na.rm = T)+diff(range(df, na.rm = T))/100),
   main = NULL,
   yaxt = 'n',
   xaxt = 'n',
