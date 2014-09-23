@@ -7,6 +7,7 @@ library(countrycode)
 library(extrafont)
 library(magrittr)
 library(png)
+library(directlabels)
 loadfonts(quiet = TRUE)
 require(gridExtra)
 
@@ -27,11 +28,11 @@ swi_22palette <- c("#336666", "#368596", "#669999", "#366096",
 	"#efe9e0", "#f7f5ed")
 
 swi_9palette <- swi_22palette[c(1, 4, 6, 8, 9, 11, 13, 17, 20)]
-
+quandlAPIkey <- 'zd85sxxvRZZVhJye3sPy'
 
 ggtheme <- {
     #based theme_bw eliminates baground, gridlines, and chart border
-  theme_bw() + theme(
+  theme_bw() + theme(text = element_text(family = font),
    plot.background = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
    panel.border = element_blank(), panel.background = element_blank()
  )
@@ -39,7 +40,7 @@ ggtheme <- {
 
 ggtheme_ygrid <- {
     #based theme_bw eliminates baground, x gridlines and ticks, and chart border
-  theme_bw() + theme(
+  theme_bw() + theme(text = element_text(family = font),
    plot.background = element_blank(), panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank(),
    panel.grid.minor.y = element_blank(), panel.border = element_blank(),panel.background = element_blank()
  )
@@ -47,7 +48,7 @@ ggtheme_ygrid <- {
 
 ggtheme_xgrid <- {
     #based theme_bw eliminates baground, y gridlines and ticks, and chart border
-  theme_bw() + theme(
+  theme_bw() + theme(text = element_text(family = font),
    plot.background = element_blank(), panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank(),
    panel.grid.minor.x = element_blank(), panel.background = element_blank()
  )
@@ -55,7 +56,7 @@ ggtheme_xgrid <- {
 
 ggtheme2 <- {
     #eliminates baground, gridlines, chart border and axis
-  theme_bw() + theme(
+  theme_bw() + theme(text = element_text(family = font),
    plot.background = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
    panel.border = element_blank(), panel.background = element_blank(), axis.ticks = element_blank(), axis.title = element_blank(),
    axis.text = element_blank()
