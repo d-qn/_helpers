@@ -27,7 +27,11 @@ swi_22palette <- c("#336666", "#368596", "#669999", "#366096",
 	"#aa8959", "#bfa681", "#d4c3aa", "#e5dbcd",
 	"#efe9e0", "#f7f5ed")
 
+
+r22palette <- c(9, 6, 3, 8, 1, 4, 7, 11, 16, 5, 14, 13, 15, 18, 21, 2, 20, 19, 12, 17, 22, 10)
+swi_22rpalette <- swi_22palette[r22palette]
 swi_9palette <- swi_22palette[c(1, 4, 6, 8, 9, 11, 13, 17, 20)]
+
 quandlAPIkey <- 'zd85sxxvRZZVhJye3sPy'
 
 ggtheme <- {
