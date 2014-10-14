@@ -7,6 +7,7 @@ library(countrycode)
 library(extrafont)
 library(magrittr)
 library(png)
+library(RSvgDevice)
 library(directlabels)
 loadfonts(quiet = TRUE)
 require(gridExtra)
@@ -28,7 +29,7 @@ swi_22palette <- c("#336666", "#368596", "#669999", "#366096",
 	"#efe9e0", "#f7f5ed")
 
 
-r22palette <- c(9, 6, 3, 8, 1, 4, 7, 11, 16, 5, 14, 13, 15, 18, 21, 2, 20, 19, 12, 17, 22, 10)
+r22palette <- c(9, 6, 3, 8, 1, 4, 7, 11, 16, 5, 14, 13, 15, 2, 10, 18, 20, 19, 12, 17, 22, 21)
 swi_22rpalette <- swi_22palette[r22palette]
 swi_9palette <- swi_22palette[c(1, 4, 6, 8, 9, 11, 13, 17, 20)]
 
@@ -38,7 +39,8 @@ ggtheme <- {
     #based theme_bw eliminates baground, gridlines, and chart border
   theme_bw() + theme(text = element_text(family = font),
    plot.background = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-   panel.border = element_blank(), panel.background = element_blank()
+   panel.border = element_blank(), panel.background = element_blank(), axis.ticks = element_line(size = 0.2),
+   plot.title = element_text(hjust = 0),panel.grid.major = element_line(colour = "#efe9e0")
  )
 }
 
@@ -46,7 +48,8 @@ ggtheme_ygrid <- {
     #based theme_bw eliminates baground, x gridlines and ticks, and chart border
   theme_bw() + theme(text = element_text(family = font),
    plot.background = element_blank(), panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank(),
-   panel.grid.minor.y = element_blank(), panel.border = element_blank(),panel.background = element_blank()
+   panel.grid.minor.y = element_blank(), panel.border = element_blank(),panel.background = element_blank(),
+   axis.ticks = element_line(size = 0.2),plot.title = element_text(hjust = 0), panel.grid.major = element_line(colour = "#efe9e0")
  )
 }
 
@@ -54,7 +57,8 @@ ggtheme_xgrid <- {
     #based theme_bw eliminates baground, y gridlines and ticks, and chart border
   theme_bw() + theme(text = element_text(family = font),
    plot.background = element_blank(), panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank(),
-   panel.grid.minor.x = element_blank(), panel.background = element_blank()
+   panel.grid.minor.x = element_blank(), panel.background = element_blank(),axis.ticks = element_line(size = 0.2),
+   plot.title = element_text(hjust = 0),panel.grid.major = element_line(colour = "#efe9e0")
  )
 }
 
@@ -63,7 +67,7 @@ ggtheme2 <- {
   theme_bw() + theme(text = element_text(family = font),
    plot.background = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
    panel.border = element_blank(), panel.background = element_blank(), axis.ticks = element_blank(), axis.title = element_blank(),
-   axis.text = element_blank()
+   axis.text = element_blank(), plot.title = element_text(hjust = 0)
  )
 }
 
@@ -71,6 +75,55 @@ paneltheme <- {
 	theme(strip.background = element_rect(colour = "white", fill = "white", size = 0.1),
 		strip.text = element_text(colour = "black", hjust = 0.1, family = font))
 }
+
+
+
+# Multiple plot function from : http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/
+#
+# ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
+# - cols:   Number of columns in layout
+# - layout: A matrix specifying the layout. If present, 'cols' is ignored.
+#
+# If the layout is something like matrix(c(1,2,3,3), nrow=2, byrow=TRUE),
+# then plot 1 will go in the upper left, 2 will go in the upper right, and
+# 3 will go all the way across the bottom.
+#
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  require(grid)
+
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+
+  numPlots = length(plots)
+
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                    ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+
+ if (numPlots==1) {
+    print(plots[[1]])
+
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+
 
 ############################################################################################
 ###   Load files to transpose country and swiss cantons
@@ -106,6 +159,19 @@ formatShp <- function(shpF) {
 ###   Create multiple version SVG from a svg and text to translate files
 ############################################################################################
 
+getTextFromSVG <- function(input = NULL, ouputFileAppend = "_text.csv") {
+	if(!file.exists(input)) stop (input, " cannot be found")
+	if(!grepl("\\.svg$", input)) stop(input, " needs to be a svg file")
+
+	data <- readLines(input, warn = F)
+
+	# get all the text elements
+	idx <- grep(">(.*)</tspan></text>", data)
+	texts <- gsub(".*>(.*)</tspan></text>", "\\1", data[idx])
+
+	# discard text elements which are only numbers
+	write.csv(texts[grep("^\\d+$", texts, invert = T)], file = gsub("\\.svg", ouputFileAppend, input))
+}
 createTranslatedSVG <- function(input = NULL, text = NULL, inDirectory = "trad", overwrite = FALSE, ...) {
 	if(!file.exists(input)) stop (input, " cannot be found")
 	if(!grepl("\\.svg$", input)) stop(input, " needs to be a svg file")
