@@ -1,11 +1,13 @@
 library(ggplot2)
 library(RColorBrewer)
-library(reshape)
-library(plyr)
 library(scales)
 library(countrycode)
 library(extrafont)
 library(magrittr)
+library(reshape)
+# library(plyr)
+library(dplyr)
+#library(tidyr) #devtools::install_github("hadley/tidyr")
 library(png)
 library(RSvgDevice)
 library(directlabels)
@@ -151,7 +153,7 @@ swissMapShp2012.path <- "~/swissinfo/swiss-maps/shp2012/ch"
 formatShp <- function(shpF) {
 	shpF@data$id <- rownames(shpF@data)
 	shpF.points <- fortify(shpF, region = "id")
-	shpF.df <- join(shpF.points, shpF@data, by = "id")
+	shpF.df <- plyr::join(shpF.points, shpF@data, by = "id")
 	shpF.df
 }
 
