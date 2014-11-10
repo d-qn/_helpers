@@ -48,4 +48,37 @@ A package should be listed in only one of these fields.
 prepare_Rd: swiTheme-package.Rd:32: All text must be in a section
 prepare_Rd: swiTheme-package.Rd:33: All text must be in a section
 * checking Rd metadata ... OK
-* checking Rd cross-references ...
+* checking Rd cross-references ... WARNING
+Unknown package ‘<pkg>’ in Rd xrefs
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... WARNING
+Undocumented arguments in documentation object 'theme_swi'
+  ‘yaxis’ ‘file’ ‘widthFig’ ‘heightFig’ ‘...’
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+See the chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... WARNING
+Warning: parse error in file 'swiTheme-Ex.R':
+20:11: unexpected symbol
+19: 
+20: ~~ simple examples
+              ^
+* checking examples ... ERROR
+Running examples in ‘swiTheme-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: swiTheme-package
+> ### Title: What the package does (short line) ~~ package title ~~
+> ### Aliases: swiTheme-package swiTheme
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ~~ simple examples of the most important functions ~~
+Error: unexpected symbol in "~~ simple examples"
+Execution halted

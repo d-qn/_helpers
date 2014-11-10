@@ -4,7 +4,7 @@ Title: ggplot2 swissinfo.ch theme
 Version: 0.5
 Date: 2014-11-09
 Author: Duc-Quang Nguyen
-Maintainer: Who to complain to <yourfault@somewhere.net>
+Maintainer: Duc-Quang Nguyen <ducquang.nguyen@swssinfo.ch>
 Depends:
     R (>= 3.0.0),
     ggplot2 (>= 0.9.3.1),

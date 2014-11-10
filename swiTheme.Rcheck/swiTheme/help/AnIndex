@@ -1,4 +1,8 @@
 swiTheme-package	swiTheme-package
+pdfswi	theme_swi
 swiTheme	swiTheme-package
+swi_dpal	theme_swi
+swi_pal	theme_swi
+swi_rpal	theme_swi
 theme_swi	theme_swi
 theme_swiYLines	theme_swi

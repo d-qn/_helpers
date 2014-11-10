@@ -9,5 +9,5 @@ Depends: R (>= 3.0.0), ggplot2 (>= 0.9.3.1), scales, extrafont, grid
 Imports: ggplot2 (>= 0.9.3.1), scales, extrafont, grid
 Description: More about what it does (maybe more than one line)
 License: GNU
-Packaged: 2014-11-10 09:55:24 UTC; nguyendu
-Built: R 3.1.1; ; 2014-11-10 09:55:25 UTC; unix
+Packaged: 2014-11-10 17:19:14 UTC; nguyendu
+Built: R 3.1.1; ; 2014-11-10 17:19:15 UTC; unix
