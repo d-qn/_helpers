@@ -10,7 +10,8 @@ Depends:
     ggplot2 (>= 0.9.3.1),
     scales,
     extrafont,
-    grid
+    grid,
+    gridExtra
 Imports:
     ggplot2 (>= 0.9.3.1),
     scales,

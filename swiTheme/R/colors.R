@@ -26,3 +26,20 @@ swi_rpal <- swi_pal[c(9, 6, 3, 8, 1, 4, 7, 11, 16, 5, 14, 13, 15, 2, 10, 18, 20,
 ##' @examples
 ##' pie(rep(1,length(swi_dpal)), col=swi_dpal)
 swi_dpal <- c("#476666", "#537373", "#5F7F7F", "#6C8C8C", "#789A99", "#DBBF8B", "#CCB27E", "#BEA472", "#B09766", "#A28959")
+
+## another swissinfo diverging color palette with 10 levels
+##' @rdname colors_swi
+##' @export
+##' @examples
+##' pie(rep(1,length(swi_dpal)), col=swi_dpal2)
+swi_dpal2 <- c("#336666", "#4E8080", "#689A9A", "#82B5B5", "#9DD0D0", "#E2C08C", "#C7A472", "#AA8959", "#907142", "#75582B")
+
+##  swissinfo single hue color palette
+##' @rdname colors_swi
+##' @export
+##' @examples
+##' pie(rep(1,length(swi_spal)), col=swi_spal)
+swi_spal <- c("#f7f5ed", "#efe9e0", "#e5dbcd", "#d4c3aa", "#bfa681", "#aa8959")
+
+
+

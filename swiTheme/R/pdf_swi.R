@@ -1,10 +1,20 @@
 ##' swissinfo standard chart size pdf export 
 ##'
-##' @rdname color_swi
+##' Simple wrapper for R's graphics device driver (i.e. pdf) to save charts in pre-defined sizes
+##'
+##' @rdname swi_export
 ##' @importFrom grDevices pdf 
 ##' @inheritParams pdf
 ##' @export
 ##' 
-pdfswi <- function(file = "", width = 10, height = 10, ...) {
+pdfswi_sq <- function(file = "", width = 10, height = 10, ...) {
+  pdf(file, width = width, height = height, ...)
+}
+
+##' @rdname swi_export
+##' @importFrom grDevices pdf 
+##' @inheritParams pdf
+##' @export
+pdfswi_long <- function(file = "", width = 6, height = 9, ...) {
   pdf(file, width = width, height = height, ...)
 }

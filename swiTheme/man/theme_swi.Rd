@@ -6,7 +6,8 @@
 \usage{
 theme_swi(ticks = TRUE, base_family = "Open Sans", base_size = 11)
 
-theme_swiYLines(yaxis = FALSE, base_family = "Open Sans", base_size = 11,
+theme_swiYLines(yaxis = FALSE, base_family = "Open Sans",
+  base_family2 = "Open Sans Semibold", base_size = 11,
   axisColor = "#7E8279")
 }
 \arguments{
@@ -15,6 +16,8 @@ theme_swiYLines(yaxis = FALSE, base_family = "Open Sans", base_size = 11,
 \item{base_family}{Base font family}
 
 \item{base_size}{Base font size}
+
+\item{base_family2}{secondary font family}
 
 \item{axisColor}{the color for the axis and their ticks and labels}
 }

@@ -134,6 +134,29 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 country_names <- read.csv("~/swissinfo/_helpers/countrynames.csv", sep =";")
 canton_names  <- read.csv("~/swissinfo/_helpers/CantonCH_iso.csv")
 
+# get the the different canton abbreviatiosn or languages
+canton_namesStrict <- function(query, output = 'iso2') {
+	stopifnot(exists("canton_names"))
+	if (!output %in% colnames(canton_names) || length(output) != 1) {
+		stop ("output needs to be one of:", paste(colnames(canton_names), collapse =" "))
+	}
+
+	result <- query
+	for(i in 1:length(query)) {
+		q <- query[i]
+		nrow <- which(q == canton_names, T)
+		if(length(nrow) == 0) {
+			warning("\n", q, "could not be matched! q", "returned.")
+		}
+		if(length(unique(nrow[,1])) > 1) {
+			warning("\n", q, "matched multiple cantons! q", "returned.")
+		}
+		result[i] <- as.character(canton_names[unique(nrow[,1]),output])
+	}
+	result
+}
+
+
 ############################################################################################
 ###   Path to swiss maps shapfiles
 ############################################################################################

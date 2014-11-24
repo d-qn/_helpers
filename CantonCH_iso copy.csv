@@ -1,0 +1,27 @@
+iso2,iso4,français,français2,allemand,allemand2,italien,english,romanche,mixed,order,isLatin
+AG,CH-AG,Argovie,Argovie,Aargau,Aargau,Argovia,Argovia,Argovia,Aargau,19,F
+AI,CH-AI,Appenzell Rhodes-Intérieures,Appenzell Rhodes-Intérieures,Appenzell Innerrhoden,Appenzell Innerrhoden,Appenzello Interno,Appenzell Inner Rhodes,Appenzell Dadens,Appenzell Innerrhoden,15,F
+AR,CH-AR,Appenzell Rhodes-Extérieures,Appenzell Rhodes-Extérieures,Appenzell Ausserrhoden,Appenzell Ausserrhoden,Appenzello Esterno,Appenzell Outer Rhodes,Appenzell Dador,Appenzell Ausserrhoden,16,F
+BE,CH-BE,Berne,Berne,Bern,Bern,Berna,Berne,Berna,Bern,2,F
+BL,CH-BL,Canton de Bâle-Campagne,Bâle-Campagne,Basel-Landschaft,Basel-Landschaft,Basilea-Campagna,Basle-Country,Basilea-Champagna,Basel-Landschaft,13,F
+BS,CH-BS,Bâle-Ville,Bâle-Ville,Basel-Stadt,Basel-Stadt,Basilea-Città,Basle-City,Basilea-Citad,Basel-Stadt,12,F
+FR,CH-FR,Fribourg,Fribourg,Freiburg,Freiburg,Friburgo,Fribourg,Friburg,Fribourg,10,T
+GE,CH-GE,Genève,Genève,Genf,Genf,Ginevra,Geneva,Genevra,Genève,25,T
+GL,CH-GL,Glaris,Glaris,Glarus,Glarus,Glarona,Glarus,Glaruna,Glarus,8,F
+GR,CH-GR,Grisons,Grisons,Graubünden,Graubünden,Grigioni,Grisons,Grischun,Graubünden,18,F
+JU,CH-JU,Jura,Jura,Jura,Jura,Giura,Jura,Giura,Jura,26,T
+LU,CH-LU,Lucerne,Lucerne,Luzern,Luzern,Lucerna,Lucerne,Lucerna,Luzern,3,F
+NE,CH-NE,Neuchâtel,Neuchâtel,Neuenburg,Neuenburg,Neuchâtel,Neuchâtel,Neuchâtel,Neuchâtel,24,T
+NW,CH-NW,Nidwald,Nidwald,Nidwalden,Nidwalden,Nidwaldo,Nidwald,Sutsilvaniao,Nidwalden,7,F
+OW,CH-OW,Obwald,Obwald,Obwalden,Obwalden,Obwaldo,Obwald,Sursilvaniao,Obwalden,6,F
+SG,CH-SG,Saint-Gall,St-Gall,Sankt Gallen,St. Gallen,San-Gallo,St-Gall,Son Gagl,St. Gallen,17,F
+SH,CH-SH,Schaffhouse,Schaffhouse,Schaffhausen,Schaffhausen,Sciaffusa,Schaffhausen,Schaffusa,Schaffhausen,14,F
+SO,CH-SO,Soleure,Soleure,Solothurn,Solothurn,Soletta,Solothurn,Soloturn,Solothurn,11,F
+SZ,CH-SZ,Schwytz,Schwytz,Schwyz,Schwyz,Svitto,Schwyz,Sviz,Schwyz,5,F
+TG,CH-TG,Thurgovie,Thurgovie,Thurgau,Thurgau,Turgovia,Thurgovia,Turgovia,Thurgau,20,F
+TI,CH-TI,Tessin,Tessin,Tessin,Tessin,Ticino,Ticino,Tessin,Ticino,21,T
+UR,CH-UR,Uri,Uri,Uri,Uri,Uri,Uri,Uri,Uri,4,F
+VD,CH-VD,Vaud,Vaud,Waadt,Waadt,Vaud,Vaud,Vad,Vaud,22,T
+VS,CH-VS,Valais,Valais,Wallis,Wallis,Vallese,Valais,Vallais,Valais,23,T
+ZG,CH-ZG,Zoug,Zoug,Zug,Zug,Zugo,Zug,Zug,Zug,9,F
+ZH,CH-ZH,Zurich,Zurich,Zürich,Zürich,Zurigo,Zurich,Turitg,Zürich,1,F

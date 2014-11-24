@@ -31,7 +31,7 @@ Maintainer: Who to complain to <yourfault@somewhere.net>
 }
 ~~ Optionally other standard keywords, one per line, from file KEYWORDS in the R ~~
 ~~ documentation directory ~~
-\keyword{ package }
+\keyword{ ggplot2, pdf, grid, scales }
 \seealso{
 ~~ Optional links to other man pages, e.g. ~~
 ~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~

@@ -2,8 +2,10 @@
 \docType{data}
 \name{swi_pal}
 \alias{swi_dpal}
+\alias{swi_dpal2}
 \alias{swi_pal}
 \alias{swi_rpal}
+\alias{swi_spal}
 \title{swissinfo.ch standard color palette}
 \format{\preformatted{ chr [1:22] "#336666" "#368596" "#669999" "#366096" "#333366" ...
 }}
@@ -13,6 +15,10 @@ swi_pal
 swi_rpal
 
 swi_dpal
+
+swi_dpal2
+
+swi_spal
 }
 \description{
 swissinfo.ch standard color palette
@@ -23,6 +29,8 @@ swissinfo random color palette
 pie(rep(1,length(swi_pal)), col=swi_pal)
 pie(rep(1,length(swi_rpal)), col=swi_rpal)
 pie(rep(1,length(swi_dpal)), col=swi_dpal)
+pie(rep(1,length(swi_dpal)), col=swi_dpal2)
+pie(rep(1,length(swi_spal)), col=swi_spal)
 }
 \keyword{datasets}
 

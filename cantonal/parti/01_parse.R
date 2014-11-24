@@ -5,15 +5,62 @@ source("~/swissinfo/_helpers/helpers.R")
 ############################################################################################
 
 infile <- '2011-Table 1.csv'
+partis <- c('PLR', 'PDC', 'PS', 'UDC', 'PES')
+
 
 # Load xls sheet
 readFile <- read.csv(infile, sep =",")
 
 ## remove all non-numeric values
-df <- data.frame(as.character(readFile[,1]), sapply(readFile[2:ncol(readFile)], function(c) as.numeric(c)))
+df <- data.frame(as.character(readFile[,1]), sapply(readFile[2:ncol(readFile)], function(c) as.numeric(as.character(c))))
+
+## MAP canton name to 2 letters abbrevation
+iso2c <- sapply(1:nrow(df), function(i) {
+  	c <- df[i,1]
+
+    idx <- match(c, canton_names[,'allemand2'])
+    if(!is.na(idx)) {
+		as.character(canton_names[idx, 'iso2'])
+	} else {
+		as.character(canton_names[agrep(c, canton_names[,'allemand2'], costs = list(sub = 10, del = 3)), 'iso2'])
+	}
+  })
+
+if(any(duplicated(iso2c)) || !is.vector(iso2c)) {
+	stop("Problem with the 2 letters mapping!")
+}
+
+cantons.init <- df[,1]
+df <- df[,-c(1)]
+rownames(df) <- iso2c
+
+iorder <- match(canton_names$iso2, rownames(df))
+df <- df[iorder,]
+
+# test sum % add up to 100 and partis of interest are present
+stopifnot(all(apply(df, 1, sum, na.rm = T) >= 99.9 | apply(df, 1, sum, na.rm = T) <= 100.1))
+stopifnot(all(partis %in%  colnames(df)))
+
+sapply(partis, function(p) {
+	df[,p] / 100
+})
 
 
-############################# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -------------<<<<<<<<<<<<<<<<<<<
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 iorder <- match(canton_names$iso2, colnames(df))
 
