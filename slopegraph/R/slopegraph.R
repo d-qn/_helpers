@@ -94,39 +94,18 @@ slopegraph <- function(
 
   l <- df.rescale[,1] # I MAY WANT TO BIN THESE SO THAT CLOSE VALUES DON'T OVERLAP
   leftlabs <- lapply(split(rownames(df.rescale),l), paste, collapse = collapse.label)
-  #leftlabs <- lapply(split(rownames(df.rescale),l), paste, collapse.label, sep="")
 
-  lab.dup <- sapply(leftlabs, length) > 1
   # print text for no labels on the same row
-  text(1 - offset.lab, as.numeric(names(leftlabs)[!lab.dup]),
-       col=col.lab[match(as.numeric(names(leftlabs)[!lab.dup]), l)], leftlabs[!lab.dup], pos=labpos.left, cex=cex.lab, font=font.lab)
-  # print multiple labels on the same row
-
-  sapply(as.numeric(names(lab.dup)[lab.dup]), function(pos) {
-    idx <- l == pos
-    text(c(1 - offset.lab, 1:(sum(idx)-1) * -lab.sep + (1 - offset.lab)),
-         pos, col=col.lab[idx], unlist(leftlabs[as.character(pos)]), pos=labpos.left,
-         cex=cex.lab, font=font.lab)
-  })
+  text(1 - offset.lab, as.numeric(names(leftlabs)),
+       col=col.lab[match(as.numeric(names(leftlabs)), l)], leftlabs, pos=labpos.left, cex=cex.lab, font=font.lab)
 
   # right-side labels
   r <- df.rescale[,ncol(df)] # I MAY WANT TO BIN THESE SO THAT CLOSE VALUES DON'T OVERLAP
   rightlabs <- lapply(split(rownames(df.rescale),r), paste, collapse=collapse.label)
-  #rightlabs <- lapply(split(rownames(df.rescale),r), paste, collapse.label, sep="")
-  lab.dup <- sapply(rightlabs, length) > 1
 
   # print text for no labels on the same row
-  text(ncol(df)+offset.lab, as.numeric(names(rightlabs)[!lab.dup]),
-       col=col.lab[match(as.numeric(names(rightlabs)[!lab.dup]), r)], rightlabs[!lab.dup], pos=labpos.right, cex=cex.lab, font=font.lab)
-  # print multiple labels on the same row
-
-  sapply(as.numeric(names(lab.dup)[lab.dup]), function(pos) {
-    idx <- r == pos
-    text(c(ncol(df) + offset.lab, 1:(sum(idx)-1) * lab.sep + (ncol(df) + offset.lab)),
-         pos, col=col.lab[idx], unlist(rightlabs[as.character(pos)]), pos=labpos.right,
-         cex=cex.lab, font=font.lab)
-  })
-
+  text(ncol(df)+offset.lab, as.numeric(names(rightlabs)),
+       col=col.lab[match(as.numeric(names(rightlabs)), r)], rightlabs, pos=labpos.right, cex=cex.lab, font=font.lab)
 
   # numeric value labels
   # deal with duplicate value labels (i.e., not double printing anything)
