@@ -1,6 +1,6 @@
-* using log directory ‘/Users/dqn/Google Drive/swissinfo/_helpers/slopegraph.Rcheck’
-* using R version 3.0.2 (2013-09-25)
-* using platform: x86_64-apple-darwin10.8.0 (64-bit)
+* using log directory ‘/Users/nguyendu/Google Drive/swissinfo/_helpers/slopegraph.Rcheck’
+* using R version 3.1.1 (2014-07-10)
+* using platform: x86_64-apple-darwin13.1.0 (64-bit)
 * using session charset: UTF-8
 * checking for file ‘slopegraph/DESCRIPTION’ ... OK
 * this is package ‘slopegraph’ version ‘0.1’
@@ -17,7 +17,7 @@
 * checking package directory ... OK
 * checking DESCRIPTION meta-information ... WARNING
 Non-standard license specification:
-  What license is it under?
+  GNU
 Standardizable: FALSE
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -30,6 +30,7 @@ Standardizable: FALSE
 * checking whether the package can be unloaded cleanly ... OK
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
@@ -42,8 +43,10 @@ Standardizable: FALSE
 * checking for code/documentation mismatches ... OK
 * checking Rd \usage sections ... WARNING
 Undocumented arguments in documentation object 'slopegraph'
-  ‘ylim’ ‘xaxt’ ‘xlab’ ‘ylab’ ‘labpos.right’ ‘col.lab’ ‘col.xaxt’
-  ‘offset.lab’ ‘cex.num’ ‘font.num’ ‘lwd’ ‘...’
+  ‘font.num’ ‘...’
+
+Undocumented arguments in documentation object 'slopegraph2'
+  ‘endpts’
 
 Functions with \usage entries need to have the appropriate \alias
 entries, and all their arguments documented.
@@ -57,7 +60,7 @@ Running examples in ‘slopegraph-Ex.R’ failed
 The error most likely occurred in:
 
 > ### Name: slopegraph
-> ### Title: Slopegraph chart
+> ### Title: Slopegraph charts
 > ### Aliases: slopegraph
 > 
 > ### ** Examples
