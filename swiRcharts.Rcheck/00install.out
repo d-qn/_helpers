@@ -1,0 +1,11 @@
+* installing *source* package ‘swiRcharts’ ...
+** R
+** inst
+** preparing package for lazy loading
+** help
+Warning: /Users/nguyendu/Google Drive/swissinfo/_helpers/swiRcharts.Rcheck/00_pkg_src/swiRcharts/man/swiRcharts-package.Rd:32: All text must be in a section
+Warning: /Users/nguyendu/Google Drive/swissinfo/_helpers/swiRcharts.Rcheck/00_pkg_src/swiRcharts/man/swiRcharts-package.Rd:33: All text must be in a section
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (swiRcharts)
