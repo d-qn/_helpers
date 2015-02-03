@@ -4,23 +4,23 @@
 \alias{hSeries}
 \title{Helper functions for rCharts}
 \usage{
-hSeries(x, y, z, name, series)
+hSeries(x, y, z, name, color = NULL, series)
 
 hChart2responsiveHTML(hChart.html, output.html = "rHighchart.html",
   output = ".", source = "source:",
   author = "Duc-Quang Nguyen | swissinfo.ch", h2 = "title",
-  h3 = "description")
+  descr = "descriptive text", h3 = "subtitle")
 }
 \arguments{
 \item{x,y,z}{a numeric of same length}
 
-\item{name,series}{a character of same length}
+\item{color,name,series}{a character of same length}
 
 \item{hChart.html,output.html}{character file path to the input highchart html and the output reponsive html}
 
 \item{output}{a path to a folder where the reponsive html file and depending js libraries will be saved}
 
-\item{source,author,h2,}{h3 characters}
+\item{source,author,h2,}{descr,h3 characters}
 }
 \description{
 Misc helper functions to create interactive charts with rCharts
@@ -29,16 +29,17 @@ Create a responsive html page along with javascript library files
 }
 \examples{
 \dontrun{
-Example for hSeries to create a labelled bubble scatterchart with rCharts/highcharts
+#Example for hSeries to create a labelled bubble scatterchart with rCharts/highcharts
 
 library(swiTheme)
 a <- rCharts::Highcharts$new()
 x <- 1:10
 y <- seq(1, 100, 10)
 z <- 10:1
+color <- rep(c("grey", "red"), 5)
 name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
 series <- c(rep(c("blob", "poop", "doop"), 3), "asdf")
-a$series(hSeries(x,y,z,name, series))
+a$series(hSeries(x,y,z,name, color, series))
 
 # tweak the bubble plot
 a$chart(zoomType = "xy", type = "bubble")

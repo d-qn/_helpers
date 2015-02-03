@@ -50,16 +50,17 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### ** Examples
 
 ## Not run: 
-##D Example for hSeries to create a labelled bubble scatterchart with rCharts/highcharts
+##D #Example for hSeries to create a labelled bubble scatterchart with rCharts/highcharts
 ##D 
 ##D library(swiTheme)
 ##D a <- rCharts::Highcharts$new()
 ##D x <- 1:10
 ##D y <- seq(1, 100, 10)
 ##D z <- 10:1
+##D color <- rep(c("grey", "red"), 5)
 ##D name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
 ##D series <- c(rep(c("blob", "poop", "doop"), 3), "asdf")
-##D a$series(hSeries(x,y,z,name, series))
+##D a$series(hSeries(x,y,z,name, color, series))
 ##D 
 ##D # tweak the bubble plot
 ##D a$chart(zoomType = "xy", type = "bubble")

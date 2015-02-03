@@ -8,5 +8,5 @@ Depends: R (>= 3.0.0), rCharts, swiTheme, XML
 Maintainer: Who to complain to <yourfault@somewhere.net>
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
-Packaged: 2015-01-19 15:40:07 UTC; nguyendu
-Built: R 3.1.2; ; 2015-01-19 15:40:07 UTC; unix
+Packaged: 2015-02-03 07:54:51 UTC; nguyendu
+Built: R 3.1.2; ; 2015-02-03 07:54:52 UTC; unix

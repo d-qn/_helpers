@@ -4,22 +4,23 @@
 ##'
 ##' @rdname swi_rcharts
 ##' @param x,y,z a numeric of same length
-##' @param name,series a character of same length
+##' @param color,name,series a character of same length
 ##' @import rCharts
 ##' @export
 ##' @examples
 ##'
 ##' \dontrun{
-##' Example for hSeries to create a labelled bubble scatterchart with rCharts/highcharts
+##' #Example for hSeries to create a labelled bubble scatterchart with rCharts/highcharts
 ##'
 ##' library(swiTheme)
 ##' a <- rCharts::Highcharts$new()
 ##' x <- 1:10
 ##' y <- seq(1, 100, 10)
 ##' z <- 10:1
+##' color <- rep(c("grey", "red"), 5)
 ##' name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
 ##' series <- c(rep(c("blob", "poop", "doop"), 3), "asdf")
-##' a$series(hSeries(x,y,z,name, series))
+##' a$series(hSeries(x,y,z,name, color, series))
 ##'
 ##' # tweak the bubble plot
 ##' a$chart(zoomType = "xy", type = "bubble")
@@ -35,23 +36,26 @@
 ##' a$save(hChart.html)
 ##' }
 
-hSeries <- function(x, y, z, name, series) {
+hSeries <- function(x, y, z, name, color = NULL, series) {
   # Check input
   stopifnot(length(x) == length(y), length(z) == length(x), length(name) == length(x),
             length(series) == length(x))
-
+  stopifnot(is.null(color) || length(color) == length(x))
+  
   if(!is.numeric(x)) stop("x needs to be numeric")
   if(!is.numeric(y)) stop("y needs to be numeric")
   if(!is.numeric(z)) stop("z needs to be numeric")
 
-  df <- data.frame (x = as.numeric(x), y = as.numeric(y), z = as.numeric(z), name = name, series = series)
+  df <- data.frame (x = as.numeric(x), y = as.numeric(y), z = as.numeric(z), color = color, name = name, series = series)
 
   # TODO: use  rCharts::toJSONArray2 (http://stackoverflow.com/questions/26507326/rcharts-change-the-individual-point-colors-of-a-time-series-plot-highcharts)
   # !!!!!!!!!!!!!!!!!
   seriesList <- by(df, as.factor(df$series), function(df.s) {
     list(
       data = lapply(1:nrow(df.s), function(i) {
-        list(x = df.s[i,'x'], y = df.s[i,'y'], z = as.character(df.s[i,'z']), name = as.character(df.s[i,'name']))
+        res <- list(x = df.s[i,'x'], y = df.s[i,'y'], z = as.character(df.s[i,'z']), name = as.character(df.s[i,'name']))
+        if(!is.null(color)) res$color <- df.s[i,'color']
+        res
       }),
       name = as.character(df.s$series[1])
     )
@@ -69,7 +73,7 @@ hSeries <- function(x, y, z, name, series) {
 ##' @rdname swi_rcharts
 ##' @param hChart.html,output.html character file path to the input highchart html and the output reponsive html 
 ##' @param output a path to a folder where the reponsive html file and depending js libraries will be saved
-##' @param source,author,h2, h3 characters
+##' @param source,author,h2, descr,h3 characters
 ##' @import XML
 ##' @export
 ##' @examples
@@ -79,8 +83,8 @@ hSeries <- function(x, y, z, name, series) {
 ##' hChart2responsiveHTML(hChart.html, source = "source: stupid data")
 ##' }
 hChart2responsiveHTML <- function(hChart.html, output.html = "rHighchart.html", output = ".", source = "source:",
-    author = "Duc-Quang Nguyen | swissinfo.ch", h2 = "title",
-    h3 = "description") {
+    author = "Duc-Quang Nguyen | swissinfo.ch", h2 = "title", descr = "descriptive text",
+    h3 = "subtitle") {
   
   # copy the responsive header to the output file
   fpath <- system.file("extdata", "responsiveHeader.html", package="swiRcharts")
@@ -99,12 +103,15 @@ hChart2responsiveHTML <- function(hChart.html, output.html = "rHighchart.html", 
   if(h2 != "") {
     cat("<h2>",h2,"</h2>\n")
   }
+  if(descr != "") {
+    cat('<div class="descr">', descr, "</div>\n")
+  }
   if(h3 != "") {
     cat("<h3>",h3,"</h3>\n")
   }
   # get and sink the div with rChart highcharts
   print(x[["//div[@class = 'rChart highcharts']"]])
-  print("</div>\n")
+  cat("</div>\n")
   
   # collpase and sink the javascript
   cat("<script type='text/javascript'>")

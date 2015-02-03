@@ -10,7 +10,7 @@
 
 /*  #######   rcharts styling ########*/
 svg text {
-/*  font-size: 9px;*/
+  font-size: 12px;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -21,19 +21,28 @@ body, h1, h2, h3, h4, h5, h6, td {
    margin: 2px;
 }
 
-#cite { font-size: 0.9em; text-align: right; margin-top:8px; padding-bottom: 12px; }
+#cite {
+    font-size: 0.5em; color: #B8B8B8; text-align: right; margin-top:1px; margin-right:3px; padding-bottom: 5px;
+}
 #cite a { text-decoration: none; color: #821122; }
-
+    
+.descr {
+       font-size: 0.8em; margin-left:1px; color: #707070;
+}
+    
+    
 h1 {
    font-size:2em;
 }
 
 h2 {
-   font-size:1.7em;
+   font-size:1.6em;
+   font-weight: lighter;
+    line-height: 115%;
 }
 
 h3 {
-   font-size:1.3em;
+   font-size:1.2em
 }
 
 h4 {
@@ -47,24 +56,10 @@ h5 {
 h6 {
    font-size:0.8em;
 }
+    
 
 a:visited {
    color: rgb(50%, 0%, 50%);
-}
-
-pre {
-   margin-top: 0;
-   max-width: 95%;
-   border: 1px solid #ccc;
-   white-space: pre-wrap;
-}
-
-pre code {
-   display: block; padding: 0.5em;
-}
-
-code.r, code.cpp {
-   background-color: #F8F8F8;
 }
 
 table, td, th {
@@ -78,22 +73,6 @@ blockquote {
    border-left: 0.5em #EEE solid;
 }
 
-hr {
-   height: 0px;
-   border-bottom: none;
-   border-top-width: thin;
-   border-top-style: dotted;
-   border-top-color: #999999;
-}
-
-@media print {
-   * {
-      background: transparent !important;
-      color: black !important;
-      filter:none !important;
-      -ms-filter: none !important;
-   }
-
    body {
       font-size:12pt;
       max-width:100%;
@@ -101,40 +80,6 @@ hr {
 
    a, a:visited {
       text-decoration: underline;
-   }
-
-   hr {
-      visibility: hidden;
-      page-break-before: always;
-   }
-
-   pre, blockquote {
-      padding-right: 1em;
-      page-break-inside: avoid;
-   }
-
-   tr, img {
-      page-break-inside: avoid;
-   }
-
-   img {
-      max-width: 100% !important;
-   }
-
-   @page :left {
-      margin: 15mm 20mm 15mm 10mm;
-   }
-
-   @page :right {
-      margin: 15mm 10mm 15mm 20mm;
-   }
-
-   p, h2, h3 {
-      orphans: 3; widows: 3;
-   }
-
-   h2, h3 {
-      page-break-after: avoid;
    }
 }
 
@@ -148,6 +93,4 @@ hr {
 <script src="js/bootstrap.min.js"></script>
 <script src="js/highcharts.js"></script>
 <script src="js/highcharts-more.js"></script>
-
-
 

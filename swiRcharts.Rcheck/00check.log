@@ -57,7 +57,7 @@ Unknown package ‘<pkg>’ in Rd xrefs
 * checking for code/documentation mismatches ... OK
 * checking Rd \usage sections ... WARNING
 Undocumented arguments in documentation object 'hSeries'
-  ‘h3’
+  ‘descr’ ‘h3’
 
 Functions with \usage entries need to have the appropriate \alias
 entries, and all their arguments documented.
