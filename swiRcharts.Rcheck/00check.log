@@ -52,17 +52,18 @@ prepare_Rd: swiRcharts-package.Rd:33: All text must be in a section
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
 * checking Rd cross-references ... WARNING
-connect: Network is unreachable
-connect: Network is unreachable
-connect: Network is unreachable
-connect: Network is unreachable
-connect: Network is unreachable
-connect: Network is unreachable
-connect: Network is unreachable
 Unknown package ‘<pkg>’ in Rd xrefs
 * checking for missing documentation entries ... OK
 * checking for code/documentation mismatches ... OK
-* checking Rd \usage sections ... OK
+* checking Rd \usage sections ... WARNING
+Undocumented arguments in documentation object 'hSeries'
+  ‘h3’
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+See the chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... WARNING
 Warning: parse error in file 'swiRcharts-Ex.R':

@@ -74,11 +74,11 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ##D hChart.html <- tempfile("hchart_labelledBubble.html")
 ##D a$save(hChart.html)
 ## End(Not run)
-##' \dontrun{
-# Example of converting a highcharts-rCharts html chart into a responsive one
-
-hChart2responsiveHTML(hChart.html, source = "source: stupid data")
-}
+## Not run: 
+##D # Example of converting a highcharts-rCharts html chart into a responsive one
+##D 
+##D hChart2responsiveHTML(hChart.html, source = "source: stupid data")
+## End(Not run)
 
 
 

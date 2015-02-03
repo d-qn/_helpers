@@ -8,7 +8,8 @@ hSeries(x, y, z, name, series)
 
 hChart2responsiveHTML(hChart.html, output.html = "rHighchart.html",
   output = ".", source = "source:",
-  author = "Duc-Quang Nguyen | swissinfo.ch", h2 = "title")
+  author = "Duc-Quang Nguyen | swissinfo.ch", h2 = "title",
+  h3 = "description")
 }
 \arguments{
 \item{x,y,z}{a numeric of same length}
@@ -19,7 +20,7 @@ hChart2responsiveHTML(hChart.html, output.html = "rHighchart.html",
 
 \item{output}{a path to a folder where the reponsive html file and depending js libraries will be saved}
 
-\item{source,author,h2}{characters}
+\item{source,author,h2,}{h3 characters}
 }
 \description{
 Misc helper functions to create interactive charts with rCharts
@@ -52,7 +53,7 @@ a
 hChart.html <- tempfile("hchart_labelledBubble.html")
 a$save(hChart.html)
 }
-##' \dontrun{
+\dontrun{
 # Example of converting a highcharts-rCharts html chart into a responsive one
 
 hChart2responsiveHTML(hChart.html, source = "source: stupid data")

@@ -69,16 +69,18 @@ hSeries <- function(x, y, z, name, series) {
 ##' @rdname swi_rcharts
 ##' @param hChart.html,output.html character file path to the input highchart html and the output reponsive html 
 ##' @param output a path to a folder where the reponsive html file and depending js libraries will be saved
-##' @param source,author,h2 characters
+##' @param source,author,h2, h3 characters
 ##' @import XML
 ##' @export
 ##' @examples
-##' ##' \dontrun{
+##' \dontrun{
 ##' # Example of converting a highcharts-rCharts html chart into a responsive one
 ##' 
 ##' hChart2responsiveHTML(hChart.html, source = "source: stupid data")
-##'}
-hChart2responsiveHTML <- function(hChart.html, output.html = "rHighchart.html", output = ".", source = "source:", author = "Duc-Quang Nguyen | swissinfo.ch", h2 = "title") {
+##' }
+hChart2responsiveHTML <- function(hChart.html, output.html = "rHighchart.html", output = ".", source = "source:",
+    author = "Duc-Quang Nguyen | swissinfo.ch", h2 = "title",
+    h3 = "description") {
   
   # copy the responsive header to the output file
   fpath <- system.file("extdata", "responsiveHeader.html", package="swiRcharts")
@@ -95,10 +97,14 @@ hChart2responsiveHTML <- function(hChart.html, output.html = "rHighchart.html", 
   sink(output.html, append = T)
   
   if(h2 != "") {
-    cat("<h2>",h2,"</h2>")
+    cat("<h2>",h2,"</h2>\n")
+  }
+  if(h3 != "") {
+    cat("<h3>",h3,"</h3>\n")
   }
   # get and sink the div with rChart highcharts
-  x[["//div[@class = 'rChart highcharts']"]]
+  print(x[["//div[@class = 'rChart highcharts']"]])
+  print("</div>\n")
   
   # collpase and sink the javascript
   cat("<script type='text/javascript'>")
