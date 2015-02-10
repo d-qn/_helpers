@@ -2,5 +2,4 @@
 
 export(hChart2responsiveHTML)
 export(hSeries)
-import(XML)
 import(rCharts)

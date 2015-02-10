@@ -74,7 +74,6 @@ hSeries <- function(x, y, z, name, color = NULL, series) {
 ##' @param hChart.html,output.html character file path to the input highchart html and the output reponsive html 
 ##' @param output a path to a folder where the reponsive html file and depending js libraries will be saved
 ##' @param source,author,h2,descr,h3 characters
-##' @import XML
 ##' @export
 ##' @examples
 ##' \dontrun{
@@ -92,11 +91,11 @@ hChart2responsiveHTML <- function(hChart.html, output.html = "rHighchart.html", 
   if(!status) {"Could not copy header file!"}
   
   ## Load highcharts'html and get everything between the tag <div rChart highcharts> until the last <script>
-  
-  # parse the body of highchart's html
-  x <-  xmlParse(hChart.html, isHTML = T)
-  x.body <- xmlChildren(xmlRoot(x))$body
-  
+  x <- readLines(hChart.html)
+  istart <- grep("rChart highcharts", x)
+  scriptStartEnd <- data.frame(start = grep("<script", x), end = grep("\\/script>", x))
+  scriptStartEnd$length <- scriptStartEnd$end - scriptStartEnd$start
+
   # append javacript code to output.html
   sink(output.html, append = T)
   
@@ -110,22 +109,14 @@ hChart2responsiveHTML <- function(hChart.html, output.html = "rHighchart.html", 
     cat("<h3>",h3,"</h3>\n")
   }
   # get and sink the div with rChart highcharts
-  print(x[["//div[@class = 'rChart highcharts']"]])
-  cat("</div>\n")
-  
-  # collpase and sink the javascript
-  cat("<script type='text/javascript'>")
-  cat(sapply(getNodeSet(x.body, "//script"), xmlValue), collapse ="")
-  cat("</script>")
-  
-  
+  cat(x[istart:scriptStartEnd[which.max(scriptStartEnd$length),'end']])
+    
   # add the footer: source & author
   cat('\n\n<!-- Source -->\n<div id="cite">', source, "|", author, "</div>")
   cat("\n\n\n</body>\n</html>")
   
   sink()
-  
-  
+   
   ## copy the javacript library in a folder ".js"
   lib.js <- list.files(system.file("extdata", package="swiRcharts"), ".js", full.names = T)
   if(!file.exists(file.path(output, "js"))) {
