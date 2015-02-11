@@ -200,22 +200,33 @@ parseTxt <- function(xmlTree) {
 
 get_nonNumericNonEmptyString <- function(textNodes) {
 	# Get the index of text which are not empty and not only numeric
-	!sapply(textNodes, xmlValue) %in% c("", " ", "\n") & !grepl("^\\d+$", sapply(textNodes, xmlValue))
+	!sapply(textNodes, xmlValue) %in% c("", " ", "\n") & !grepl("^\\d+$", sapply(textNodes, xmlValue)) & sapply(textNodes, xmlSize) == 1
+}
+
+get_NestedNonNumericNonEmptyString <- function(textNodes) {
+	# Get the index of text which are not empty and not only numeric
+	!sapply(textNodes, xmlValue) %in% c("", " ", "\n") & !grepl("^\\d+$", sapply(textNodes, xmlValue)) & sapply(textNodes, xmlSize) == 1
 }
 
 createTextToTranslate <- function(input, ouputFileAppend = "_text.csv") {
 	textNodes <- parseTxt(parseSVG(input))
 	idx <- get_nonNumericNonEmptyString(textNodes)
+	text.ori <- sapply(textNodes[idx], xmlValue)
+
+	# Get the nested nodes with text
+	idx.nest <- which(sapply(textNodes, xmlSize) > 1)
+	text.ori <- c(text.ori, sapply(xmlChildren(textNodes[[idx.nest]]), xmlValue))
 
 	# Get the value of text elements
-	write.csv(unique(sapply(textNodes[idx], xmlValue)),
+	write.csv(unique(text.ori),
 	  file = gsub("\\.svg", ouputFileAppend, input), row.names = FALSE)
 }
 
 
-input <- "areaChart_europeanCountries_ygrid.svg"
-tradFile <- "trad.csv"
-inDirectory <- "trad"
+# input <- "childCareCost_slopgraph_fr.svg"
+# tradFile <- "trad.csv"
+# inDirectory <- "trad"
+# overwrite = FALSE
 createTranslatedSVG <- function(input = NULL, tradFile = NULL, inDirectory = "trad", overwrite = FALSE, ...) {
 		if(!file.exists(input)) stop (input, " cannot be found")
 		if(!grepl("\\.svg$", input)) stop(input, " needs to be a svg file")
@@ -227,8 +238,13 @@ createTranslatedSVG <- function(input = NULL, tradFile = NULL, inDirectory = "tr
 
 	    # Get the text from the input svg to translate
 		textNodes <- parseTxt(xmlTree)
+
 		idx <- get_nonNumericNonEmptyString(textNodes)
 		text.ori <- sapply(textNodes[idx], xmlValue)
+
+		# Get the nested nodes with text
+		idx.nest <- which(sapply(textNodes, xmlSize) > 1)
+		text.ori <- c(text.ori, sapply(xmlChildren(textNodes[[idx.nest]]), xmlValue))
 
 		# Get the translations
 		trad <- read.csv(tradFile, header = TRUE, stringsAsFactors = FALSE)
@@ -236,24 +252,26 @@ createTranslatedSVG <- function(input = NULL, tradFile = NULL, inDirectory = "tr
 		if(ncol(trad) <= 1) stop("Translation file needs at least 2 columns")
 
 		# Match the translation first column to the original text
-		idx <- match(text.ori, trad[,1])
-		if(any(is.na(idx))) stop("Translation file do not match the text from the svg!")
-
-		for(j in 1:length(textNodes[idx])) {
-			xmlValue(textNodes[idx][[j]])
-		}
-
+		ori2trad <- match(text.ori, trad[,1])
+		if(any(is.na(ori2trad))) stop("Translation file do not match the text from the svg!")
 
 		# Loop trough the different columns and create svg files
-		sapply(2:ncol(trad), function(i) {
+		for(i in 2:ncol(trad)) {
 			lang <- colnames(trad)[i]
 
 			for(j in 1:length(textNodes[idx])) {
-				xmlValue(textNodes[idx][[j]]) <- trad[idx[j], lang]
+				xmlValue(textNodes[idx][[j]]) <- trad[ori2trad[j], lang]
 			}
-
+			# if there are nested node text
+			if(length(idx.nest) > 0) {
+				for(k in 1:length(idx.nest)) {
+					sapply(xmlChildren(textNodes[[idx.nest[k]]]), function(node) {
+						xmlValue(node) <- trad[match(xmlValue(node), trad[,1]),lang]
+					})
+				}
+			}
 			saveXML(xmlTree, "testTranslate.svg")
-		})
+		}
 }
 
 
