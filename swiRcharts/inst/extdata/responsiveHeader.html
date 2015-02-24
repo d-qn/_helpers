@@ -14,6 +14,23 @@ svg text {
   font-family: 'Open Sans', sans-serif;
 }
 
+/* ensure data labels are not visible over the tooltip: 
+http://stackoverflow.com/questions/15130311/highcharts-labels-visible-over-tooltip */
+
+.label { z-index: 1 !important;}
+
+.highcharts-tooltip span {
+  background-color:white;
+  opacity:1;
+  z-index:9999 !important;
+}
+
+.tooltip {
+  padding:0px;
+}
+    
+/*  #######   header and footer styling   ########*/  
+
 body, h1, h2, h3, h4, h5, h6, td {
    font-family: 'Open Sans', sans-serif;
    background-color: white;
@@ -27,7 +44,7 @@ body, h1, h2, h3, h4, h5, h6, td {
 #cite a { text-decoration: none; color: #821122; }
     
 .descr {
-       font-size: 0.8em; margin-left:1px; color: #707070;
+ font-size: 0.8em; margin-left:1px; color: #707070;
 }
     
     
