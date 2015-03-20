@@ -12,10 +12,5 @@ Depends:
     extrafont,
     grid,
     gridExtra
-Imports:
-    ggplot2 (>= 0.9.3.1),
-    scales,
-    extrafont,
-    grid
 Description: More about what it does (maybe more than one line)
 License: GNU

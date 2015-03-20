@@ -6,7 +6,7 @@
 \usage{
 pdfswi_sq(file = "", width = 10, height = 10, ...)
 
-pdfswi_long(file = "", width = 6, height = width * 1.4, ...)
+pdfswi_long(file = "", width = 6, height = width * 1.25, ...)
 }
 \description{
 Simple wrapper for R's graphics device driver (i.e. pdf) to save charts in pre-defined sizes

@@ -1,8 +1,13 @@
 swiTheme-package	swiTheme-package
-pdfswi	theme_swi
+multiplot	multiplot
+pdfswi_long	swi_export
+pdfswi_sq	swi_export
 swiTheme	swiTheme-package
-swi_dpal	theme_swi
-swi_pal	theme_swi
-swi_rpal	theme_swi
+swi_dpal	colors_swi
+swi_dpal2	colors_swi
+swi_pal	colors_swi
+swi_rpal	colors_swi
+swi_spal	colors_swi
 theme_swi	theme_swi
+theme_swi2	theme_swi
 theme_swiYLines	theme_swi
