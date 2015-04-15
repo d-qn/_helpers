@@ -1,0 +1,10 @@
+* installing *source* package ‘swiMap’ ...
+** R
+** inst
+** preparing package for lazy loading
+** help
+Warning: /Users/nguyendu/Google Drive/swissinfo/_helpers/swiMap.Rcheck/00_pkg_src/swiMap/man/swiMap-package.Rd:32: All text must be in a section
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (swiMap)
