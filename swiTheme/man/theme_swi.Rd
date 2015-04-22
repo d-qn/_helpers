@@ -2,6 +2,7 @@
 \name{theme_swi}
 \alias{theme_swi}
 \alias{theme_swi2}
+\alias{theme_swiMin}
 \alias{theme_swiYLines}
 \title{swissinfo.ch's chart theme}
 \usage{
@@ -13,6 +14,8 @@ theme_swiYLines(yaxis = FALSE, base_family = "Open Sans",
 
 theme_swi2(base_family = "Open Sans", base_family2 = "Open Sans Semibold",
   base_size = 11, axisColor = "#7E8279")
+
+theme_swiMin(base_family = "Open Sans", base_size = 11)
 }
 \arguments{
 \item{ticks}{\code{logical} Show axis ticks?}
@@ -32,9 +35,11 @@ theme_swi2(base_family = "Open Sans", base_family2 = "Open Sans Semibold",
 \description{
 swissinfo minimal font and color ggplot2 theme
 
-ggplot2 theme with horizontal grid lines
+theme_swiYLines: a ggplot2 theme with horizontal grid lines
 
-ggplot2 minimal theme
+theme_swi2, with grid lines ggplot2 minimal theme
+
+theme_swiMin, a minimal theme with no axis, no ticks, no axis text, no grid lines
 }
 \examples{
 qplot(1:10, 1:10, size = 10:1) + xlab("axis x label") + ylab ("y axis label") + theme_swi()
@@ -42,5 +47,6 @@ qplot(1:10, 1:10, size = 10:1) + xlab("axis x label") + ylab ("y axis label") + 
 qplot(mtcars$mpg) + theme_swi()
 qplot(1:10, 1:10, size = 10:1) + xlab("axis x label") + ylab ("y axis label") + theme_swiYLines()
 qplot(1:10, 1:10, size = 10:1) + xlab("axis x label") + ylab ("y axis label") + theme_swi2()
+qplot(1:10, 1:10, size = 10:1) + theme_swiMin() + ggtitle("Minimal theme: no axis & no ticks")
 }
 

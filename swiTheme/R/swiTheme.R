@@ -35,7 +35,7 @@ theme_swi <- function(ticks=TRUE, base_family="Open Sans", base_size=11) {
 
 ##' swissinfo.ch scatter plot theme for ggplot2
 ##'
-##' ggplot2 theme with horizontal grid lines
+##' theme_swiYLines: a ggplot2 theme with horizontal grid lines
 ##'
 ##' @rdname theme_swi
 ##' @inheritParams theme_swi
@@ -80,7 +80,7 @@ theme_swiYLines <- function(
 
 ##' swissinfo.ch theme for ggplot2
 ##'
-##' ggplot2 minimal theme
+##' theme_swi2, with grid lines ggplot2 minimal theme
 ##'
 ##' @rdname theme_swi
 ##' @inheritParams theme_swi
@@ -106,6 +106,30 @@ theme_swi2 <- function(
       ## PLOT MARGIN
       plot.margin = unit(c(2, 1, 1, 1), "lines")
       ## GRID LINES
+    )
+  ret
+}
+
+##' swissinfo.ch theme for ggplot2
+##'
+##' theme_swiMin, a minimal theme with no axis, no ticks, no axis text, no grid lines
+##'
+##' @rdname theme_swi
+##' @inheritParams theme_swi
+##' @examples
+##'  qplot(1:10, 1:10, size = 10:1) + theme_swiMin() + ggtitle("Minimal theme: no axis & no ticks")
+##' @export
+theme_swiMin <- function(base_family="Open Sans", base_size=11) {
+  choose_font(base_family, FALSE)
+  ret <- theme_minimal(base_family=base_family, base_size=base_size) +
+    theme(
+      plot.title   = element_text(hjust = 0, vjust = 5, size = rel(2), face = "bold"),
+      axis.ticks   = element_blank(), 
+      axis.title   = element_blank(),
+      axis.text    = element_blank(), 
+      axis.line    = element_blank(), 
+      plot.margin = unit(c(2, 1, 1, 1), "lines"),
+      panel.grid = element_blank()
     )
   ret
 }
