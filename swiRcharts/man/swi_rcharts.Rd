@@ -2,9 +2,12 @@
 \name{hSeries}
 \alias{hChart2responsiveHTML}
 \alias{hSeries}
+\alias{hSeries2}
 \title{Helper functions for rCharts}
 \usage{
 hSeries(x, y, z, name, color = NULL, series)
+
+hSeries2(df, series)
 
 hChart2responsiveHTML(hChart.html, output.html = "rHighchart.html",
   output = ".", source = "source:",
@@ -16,11 +19,17 @@ hChart2responsiveHTML(hChart.html, output.html = "rHighchart.html",
 
 \item{color,name,series}{a character of same length}
 
+\item{series}{a character, the column name in \code{df} to split the data in different highcharts' series}
+
+\item{df}{a data.frame}
+
 \item{hChart.html,output.html}{character file path to the input highchart html and the output reponsive html}
 
 \item{output}{a path to a folder where the reponsive html file and depending js libraries will be saved}
 
 \item{source,author,h2,descr,h3}{characters}
+
+\item{overwrite}{a logical, should the \code{output} file be overwritten?}
 }
 \description{
 Misc helper functions to create interactive charts with rCharts
@@ -54,10 +63,14 @@ a
 hChart.html <- tempfile("hchart_labelledBubble.html")
 a$save(hChart.html)
 }
+hSeries2 <- hSeries2(data.frame(x = x, y = y, z = z, color = color, name = name, series = series), "series")
+ b <- rCharts::Highcharts$new()
+b$series(hSeries2)
 \dontrun{
 # Example of converting a highcharts-rCharts html chart into a responsive one
 
 hChart2responsiveHTML(hChart.html, source = "source: stupid data")
+browseURL(hChart.html)
 }
 }
 

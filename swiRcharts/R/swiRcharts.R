@@ -37,6 +37,7 @@
 ##' }
 
 hSeries <- function(x, y, z, name, color = NULL, series) {
+  warning("\n", "hSeries is deprecated! Use hSeries2 instead\n")
   # Check input
   stopifnot(length(x) == length(y), length(z) == length(x), length(name) == length(x),
             length(series) == length(x))
@@ -66,6 +67,35 @@ hSeries <- function(x, y, z, name, color = NULL, series) {
   seriesList
 }
 
+##' @rdname swi_rcharts
+##' @param df a data.frame
+##' @param series a character, the column name in \code{df} to split the data in different highcharts' series
+##' @import rCharts
+##' @export
+##' @examples
+##' hSeries2 <- hSeries2(data.frame(x = x, y = y, z = z, color = color, name = name, series = series), "series")
+##'  b <- rCharts::Highcharts$new()  
+##' b$series(hSeries2)
+##' 
+hSeries2 <- function(df, series) {
+  # Check input (that series is a character and is in the given data.frame)
+  stopifnot(is.data.frame(df))
+  stopifnot(is.character(series))
+  stopifnot(series %in% colnames(df))
+  
+  seriesList <- by(df, as.factor(df[,series]), function(df.s) {
+    # remove the column series of the data.frame
+    seriesName <- as.character(df.s[1,series])
+    df.s <- df.s[,-which(colnames(df.s) == series)]
+    list(data = rCharts::toJSONArray2(df.s, json = F, names = T), name = seriesName)
+  }, simplify = F)
+  attributes(seriesList) <- NULL
+  
+  seriesList
+}
+
+
+
 ##' Save highcharts from rCharts into a responsive html webpage
 ##'
 ##' Create a responsive html page along with javascript library files
@@ -74,16 +104,24 @@ hSeries <- function(x, y, z, name, color = NULL, series) {
 ##' @param hChart.html,output.html character file path to the input highchart html and the output reponsive html 
 ##' @param output a path to a folder where the reponsive html file and depending js libraries will be saved
 ##' @param source,author,h2,descr,h3 characters
+##' @param overwrite a logical, should the \code{output} file be overwritten?
 ##' @export
 ##' @examples
 ##' \dontrun{
 ##' # Example of converting a highcharts-rCharts html chart into a responsive one
 ##' 
 ##' hChart2responsiveHTML(hChart.html, source = "source: stupid data")
+##' browseURL(hChart.html)
 ##' }
 hChart2responsiveHTML <- function(hChart.html, output.html = "rHighchart.html", output = ".", source = "source:",
     author = "Duc-Quang Nguyen | swissinfo.ch", h2 = "title", descr = "descriptive text",
     h3 = "subtitle") {
+
+  #change the output file name if already exists
+  if(file.exists(output.html)) {
+    file.rename(output.html, gsub("\\.html$", "_init\\.html", output.html))
+    warning("\n Existing uutput html renamed to:", gsub("\\.html$", "_init\\.html", output.html), "\n")
+  }
   
   # copy the responsive header to the output file
   fpath <- system.file("extdata", "responsiveHeader.html", package="swiRcharts")
