@@ -117,15 +117,16 @@ hChart2responsiveHTML <- function(hChart.html, output.html = "rHighchart.html", 
     author = "Duc-Quang Nguyen | swissinfo.ch", h2 = "title", descr = "descriptive text",
     h3 = "subtitle") {
 
+  output.html <- file.path(output, output.html)
   #change the output file name if already exists
   if(file.exists(output.html)) {
     file.rename(output.html, gsub("\\.html$", "_init\\.html", output.html))
-    warning("\n Existing uutput html renamed to:", gsub("\\.html$", "_init\\.html", output.html), "\n")
+    warning("\n Existing output html renamed to:", gsub("\\.html$", "_init\\.html", output.html), "\n")
   }
   
   # copy the responsive header to the output file
   fpath <- system.file("extdata", "responsiveHeader.html", package="swiRcharts")
-  status <- file.copy(fpath, file.path(output, output.html), FALSE)
+  status <- file.copy(fpath, output.html, FALSE)
   if(!status) {"Could not copy header file!"}
   
   ## Load highcharts'html and get everything between the tag <div rChart highcharts> until the last <script>

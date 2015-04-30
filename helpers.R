@@ -223,10 +223,6 @@ createTextToTranslate <- function(input, ouputFileAppend = "_text.csv") {
 }
 
 
-input <- "childCareCost_slopgraph_fr.svg"
-tradFile <- "trad.csv"
-inDirectory <- "trad"
-overwrite = FALSE
 createTranslatedSVG <- function(input = NULL, tradFile = NULL, inDirectory = "trad", overwrite = FALSE, ...) {
 		if(!file.exists(input)) stop (input, " cannot be found")
 		if(!grepl("\\.svg$", input)) stop(input, " needs to be a svg file")
@@ -277,19 +273,20 @@ createTranslatedSVG <- function(input = NULL, tradFile = NULL, inDirectory = "tr
 
 
 
-# getTextFromSVG <- function(input = NULL, ouputFileAppend = "_text.csv") {
-# 	if(!file.exists(input)) stop (input, " cannot be found")
-# 	if(!grepl("\\.svg$", input)) stop(input, " needs to be a svg file")
-#
-# 	data <- readLines(input, warn = F)
-#
-# 	# get all the text elements
-# 	idx <- grep(">(.*)</tspan></text>", data)
-# 	texts <- gsub(".*>(.*)</tspan></text>", "\\1", data[idx])
-#
-# 	# discard text elements which are only numbers
-# 	write.csv(texts[grep("^\\d+$", texts, invert = T)], file = gsub("\\.svg", ouputFileAppend, input))
-# }
+getTextFromSVG <- function(input = NULL, ouputFileAppend = "_text.csv") {
+	if(!file.exists(input)) stop (input, " cannot be found")
+	if(!grepl("\\.svg$", input)) stop(input, " needs to be a svg file")
+
+	data <- readLines(input, warn = F)
+
+	# get all the text elements
+	idx <- grep(">(.*)</tspan></text>", data)
+	texts <- gsub(".*>(.*)</tspan></text>", "\\1", data[idx])
+	# get unique text elements
+	texts <- unique(texts)
+	# discard text elements which are only numbers
+	write.csv(texts[grep("^\\d+$", texts, invert = T)], file = gsub("\\.svg", ouputFileAppend, input))
+}
 #
 #
 # createTranslatedSVG <- function(input = NULL, text = NULL, inDirectory = "trad", overwrite = FALSE, ...) {
