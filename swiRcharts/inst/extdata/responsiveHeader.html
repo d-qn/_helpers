@@ -8,15 +8,8 @@
 
 <style type="text/css">
 
-/*  #######   rcharts styling ########*/
-svg text {
-  font-size: 12px;
-  font-family: 'Open Sans', sans-serif;
-}
-
 /* ensure data labels are not visible over the tooltip: 
 http://stackoverflow.com/questions/15130311/highcharts-labels-visible-over-tooltip */
-
 .label { 
   z-index: 1 !important;
 }
@@ -35,23 +28,22 @@ http://stackoverflow.com/questions/15130311/highcharts-labels-visible-over-toolt
     
 /*  #######   header and footer styling   ########*/  
 
-body, h1, h2, h3, h4, h5, h6, td {
+body, h1, h2, h3, h4, h5, h6, .descr, td, table {
    font-family: 'Open Sans', sans-serif;
    background-color: white;
    font-size: 12px;
-   margin: 2px;
+   margin:3px 4px 3px 5px;
 }
 
 #cite {
-    font-size: 0.5em; color: #B8B8B8; text-align: right; margin-top:1px; margin-right:3px; padding-bottom: 5px;
+    font-size: 0.5em; color: #B8B8B8; text-align: right; margin-top:1px; margin-right:10px; padding-bottom: 3px;
 }
 #cite a { text-decoration: none; color: #821122; }
     
 .descr {
- font-size: 0.8em; margin-left:1px; color: #707070;
+ font-size: 0.8em; color: #707070;
 }
-    
-    
+     
 h1 {
    font-size:2em;
 }
@@ -85,6 +77,7 @@ a:visited {
 
 table, td, th {
   border: none;
+  font-size:0.8em;
 }
 
 blockquote {
