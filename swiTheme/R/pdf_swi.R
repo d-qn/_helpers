@@ -7,7 +7,7 @@
 ##' @inheritParams pdf
 ##' @export
 ##' 
-pdfswi_sq <- function(file = "", width = 10, height = 10, ...) {
+pdfswi_sq <- function(file = "", width = 10, height = 10, useDingbats = FALSE, ...) {
   pdf(file, width = width, height = height, ...)
 }
 
@@ -15,6 +15,6 @@ pdfswi_sq <- function(file = "", width = 10, height = 10, ...) {
 ##' @importFrom grDevices pdf 
 ##' @inheritParams pdf
 ##' @export
-pdfswi_long <- function(file = "", width = 6, height = width * 1.25 , ...) {
+pdfswi_long <- function(file = "", width = 6, height = width * 1.25 , useDingbats = FALSE, ...) {
   pdf(file, width = width, height = height, ...)
 }
