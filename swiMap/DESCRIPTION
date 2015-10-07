@@ -10,7 +10,9 @@ Imports:
     rgdal,
     rgeos,
     countrycode,
+    readxl,
     ggplot2,
+    XML,
     scales
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
