@@ -7,7 +7,7 @@
 loadCommunesCHgeographicalLevels()
 }
 \value{
-a data.frame
+a data.frame with tons of geographical features, check the source excel for more details
 }
 \description{
 Load the Swiss statistical office communes data from: \url{http://www.bfs.admin.ch/bfs/portal/fr/index/regionen/thematische_karten/01/01.html}
