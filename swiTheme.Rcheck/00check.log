@@ -1,0 +1,104 @@
+* using log directory ‘/Users/nguyendu/swissinfo/_helpers/swiTheme.Rcheck’
+* using R version 3.2.2 (2015-08-14)
+* using platform: x86_64-apple-darwin13.4.0 (64-bit)
+* using session charset: UTF-8
+* checking for file ‘swiTheme/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘swiTheme’ version ‘0.5’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘swiTheme’ can be installed ... WARNING
+Found the following significant warnings:
+  Warning: /Users/nguyendu/swissinfo/_helpers/swiTheme.Rcheck/00_pkg_src/swiTheme/man/swiTheme-package.Rd:32: All text must be in a section
+  Warning: /Users/nguyendu/swissinfo/_helpers/swiTheme.Rcheck/00_pkg_src/swiTheme/man/swiTheme-package.Rd:33: All text must be in a section
+  Warning: replacing previous import by ‘grid::unit’ when loading ‘swiTheme’
+  Warning: replacing previous import by ‘scales::alpha’ when loading ‘swiTheme’
+See ‘/Users/nguyendu/swissinfo/_helpers/swiTheme.Rcheck/00install.out’ for details.
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... NOTE
+Malformed Description field: should contain one or more complete sentences.
+Non-standard license specification:
+  GNU
+Standardizable: FALSE
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+multiplot: no visible global function definition for ‘grid.newpage’
+multiplot: no visible global function definition for ‘pushViewport’
+multiplot: no visible global function definition for ‘viewport’
+multiplot: no visible global function definition for ‘grid.layout’
+* checking Rd files ... WARNING
+prepare_Rd: swiTheme-package.Rd:32: All text must be in a section
+prepare_Rd: swiTheme-package.Rd:33: All text must be in a section
+* checking Rd metadata ... OK
+* checking Rd cross-references ... WARNING
+Unknown package ‘<pkg>’ in Rd xrefs
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... WARNING
+Undocumented arguments in documentation object 'multiplot'
+  ‘plotlist’
+Documented arguments not in \usage in documentation object 'multiplot':
+  ‘plots’
+
+Undocumented arguments in documentation object 'pdfswi_sq'
+  ‘file’ ‘width’ ‘height’ ‘useDingbats’ ‘...’
+
+Undocumented arguments in documentation object 'theme_swi'
+  ‘title_family’ ‘subtitle’ ‘base_color’ ‘yaxis’
+Duplicated \argument entries in documentation object 'theme_swi':
+  ‘base_family’ ‘axisColor’ ‘base_family2’
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... WARNING
+Warning: parse error in file 'swiTheme-Ex.R':
+59:11: unexpected symbol
+58: 
+59: ~~ simple examples
+              ^
+* checking examples ... ERROR
+Running examples in ‘swiTheme-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: multiplot
+> ### Title: Multiple plot function
+> ### Aliases: multiplot
+> 
+> ### ** Examples
+> 
+> q1 <- qplot(1:10, 1:10, size = 10:1) + xlab("axis x label") + ylab ("y axis label") + theme_swi2()
+Error: could not find function "qplot"
+Execution halted
+* checking PDF version of manual ... WARNING
+LaTeX errors when creating PDF version.
+This typically indicates Rd problems.
+* checking PDF version of manual without hyperrefs or index ... ERROR
+Re-running with no redirection of stdout/stderr.
+* DONE
+Status: 2 ERRORs, 6 WARNINGs, 2 NOTEs

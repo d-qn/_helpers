@@ -1,0 +1,255 @@
+\nonstopmode{}
+\documentclass[a4paper]{book}
+\usepackage[times,inconsolata,hyper]{Rd}
+\usepackage{makeidx}
+\usepackage[utf8,latin1]{inputenc}
+% \usepackage{graphicx} % @USE GRAPHICX@
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge Package `swiTheme'}}
+\par\bigskip{\large \today}
+\end{center}
+\begin{description}
+\raggedright{}
+\item[Type]\AsIs{Package}
+\item[Title]\AsIs{ggplot2 swissinfo.ch theme}
+\item[Version]\AsIs{0.5}
+\item[Date]\AsIs{2014-11-09}
+\item[Author]\AsIs{Duc-Quang Nguyen}
+\item[Maintainer]\AsIs{Duc-Quang Nguyen }\email{ducquang.nguyen@swssinfo.ch}\AsIs{}
+\item[Imports]\AsIs{ggplot2 (>= 2.1.0), scales, extrafont, grid, gridExtra}
+\item[Description]\AsIs{More about what it does (maybe more than one line)}
+\item[License]\AsIs{GNU}
+\item[RoxygenNote]\AsIs{5.0.1}
+\item[NeedsCompilation]\AsIs{no}
+\end{description}
+\Rdcontents{\R{} topics documented:}
+\inputencoding{utf8}
+\HeaderA{swiTheme-package}{What the package does (short line) \textasciitilde{}\textasciitilde{} package title \textasciitilde{}\textasciitilde{}}{swiTheme.Rdash.package}
+\aliasA{swiTheme}{swiTheme-package}{swiTheme}
+\keyword{ggplot2, pdf, grid, scales}{swiTheme-package}
+%
+\begin{Description}\relax
+More about what it does (maybe more than one line)
+\textasciitilde{}\textasciitilde{} A concise (1-5 lines) description of the package \textasciitilde{}\textasciitilde{}
+\end{Description}
+%
+\begin{Details}\relax
+
+\Tabular{ll}{
+Package: & swiTheme\\{}
+Type: & Package\\{}
+Version: & 1.0\\{}
+Date: & 2014-11-09\\{}
+License: & What license is it under?\\{}
+}
+\textasciitilde{}\textasciitilde{} An overview of how to use the package, including the most important functions \textasciitilde{}\textasciitilde{}
+\end{Details}
+%
+\begin{Author}\relax
+Who wrote it
+
+Maintainer: Who to complain to <yourfault@somewhere.net>
+\textasciitilde{}\textasciitilde{} The author and/or maintainer of the package \textasciitilde{}\textasciitilde{}
+\end{Author}
+%
+\begin{References}\relax
+\textasciitilde{}\textasciitilde{} Literature or other references for background information \textasciitilde{}\textasciitilde{}
+\end{References}
+%
+\begin{SeeAlso}\relax
+\textasciitilde{}\textasciitilde{} Optional links to other man pages, e.g. \textasciitilde{}\textasciitilde{}
+\textasciitilde{}\textasciitilde{} \code{\LinkA{<pkg>}{<pkg>}} \textasciitilde{}\textasciitilde{}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+~~ simple examples of the most important functions ~~
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{multiplot}{Multiple plot function}{multiplot}
+%
+\begin{Description}\relax
+To arrange multiple ggplot chart on a grid. Copied from: http://www.cookbook-r.com/Graphs/Multiple\_graphs\_on\_one\_page\_(ggplot2)/
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+multiplot(plotlist = NULL, cols = 1, layout = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{cols}] Number of columns in layout
+
+\item[\code{layout}] A matrix specifying the layout. If present, 'cols' is ignored.
+
+\item[\code{plots}] a list of ggplot objects
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+If the layout is something like matrix(c(1,2,3,3), nrow=2, byrow=TRUE), then plot 1 will go in the upper left, 2 will go in the upper right, and ll go all the way across the bottom.
+\end{Details}
+%
+\begin{Examples}
+\begin{ExampleCode}
+q1 <- qplot(1:10, 1:10, size = 10:1) + xlab("axis x label") + ylab ("y axis label") + theme_swi2()
+q2 <- qplot(mpg, data = mtcars, geom = "dotplot") + theme_swi()
+multiplot(list(q1, q2))
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{pdfswi\_sq}{swissinfo standard chart size pdf export}{pdfswi.Rul.sq}
+\aliasA{pdfswi\_long}{pdfswi\_sq}{pdfswi.Rul.long}
+%
+\begin{Description}\relax
+Simple wrapper for R's graphics device driver (i.e. pdf) to save charts in pre-defined sizes
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+pdfswi_sq(file = "", width = 10, height = 10, useDingbats = FALSE, ...)
+
+pdfswi_long(file = "", width = 6, height = width * 1.25,
+  useDingbats = FALSE, ...)
+\end{verbatim}
+\end{Usage}
+\inputencoding{utf8}
+\HeaderA{swi\_pal}{swissinfo.ch standard color palette}{swi.Rul.pal}
+\aliasA{swi\_dpal}{swi\_pal}{swi.Rul.dpal}
+\aliasA{swi\_dpal2}{swi\_pal}{swi.Rul.dpal2}
+\aliasA{swi\_rpal}{swi\_pal}{swi.Rul.rpal}
+\aliasA{swi\_spal}{swi\_pal}{swi.Rul.spal}
+\keyword{datasets}{swi\_pal}
+%
+\begin{Description}\relax
+swissinfo.ch standard color palette
+
+swissinfo random color palette
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+swi_pal
+
+swi_rpal
+
+swi_dpal
+
+swi_dpal2
+
+swi_spal
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+An object of class \code{character} of length 22.
+\end{Format}
+%
+\begin{Examples}
+\begin{ExampleCode}
+pie(rep(1,length(swi_pal)), col=swi_pal)
+pie(rep(1,length(swi_rpal)), col=swi_rpal)
+pie(rep(1,length(swi_dpal)), col=swi_dpal)
+pie(rep(1,length(swi_dpal)), col=swi_dpal2)
+pie(rep(1,length(swi_spal)), col=swi_spal)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{theme\_swi}{swissinfo.ch's chart theme}{theme.Rul.swi}
+\aliasA{swi\_theme}{theme\_swi}{swi.Rul.theme}
+\aliasA{theme\_swi2}{theme\_swi}{theme.Rul.swi2}
+\aliasA{theme\_swiMin}{theme\_swi}{theme.Rul.swiMin}
+\aliasA{theme\_swiYLines}{theme\_swi}{theme.Rul.swiYLines}
+%
+\begin{Description}\relax
+swi\_theme(): ggplot copied/inspired from https://gist.github.com/hrbrmstr/283850725519e502e70c
+
+swissinfo minimal font and color ggplot2 theme
+
+theme\_swiYLines: a ggplot2 theme with horizontal grid lines
+
+theme\_swi2, with grid lines ggplot2 minimal theme
+
+theme\_swiMin, a minimal theme with no axis, no ticks, no axis text, no grid lines
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+swi_theme(base_size = 12, base_family = "OpenSans-CondensedLight",
+  title_family = "OpenSans-Light",
+  subtitle = "OpenSans-CondensedLightItalic", y_gridlines = TRUE,
+  base_color = "#2b2b2b")
+
+theme_swi(ticks = TRUE, base_family = "Open Sans", base_size = 11)
+
+theme_swiYLines(yaxis = FALSE, base_family = "Open Sans",
+  base_family2 = "Open Sans Semibold", base_size = 11,
+  axisColor = "#7E8279")
+
+theme_swi2(base_family = "Open Sans", base_family2 = "Open Sans Semibold",
+  base_size = 11, axisColor = "#7E8279")
+
+theme_swiMin(base_family = "Open Sans", base_size = 11)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{base\_size}] Base font size
+
+\item[\code{base\_family}] Base font family
+
+\item[\code{y\_gridlines}] logical, display y gridlines
+
+\item[\code{ticks}] \code{logical} Show axis ticks?
+
+\item[\code{base\_family2}] secondary font family
+
+\item[\code{axisColor}] the color for the axis and their ticks and labels
+
+\item[\code{base\_family}] Base font family
+
+\item[\code{axisColor}] the color for the axis and their ticks and labels
+
+\item[\code{base\_family2}] secondary font family
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Examples}
+\begin{ExampleCode}
+# swi_theme() with annotations
+gg <- qplot(1:10, 1:10) + swi_theme()
+# add y-axis label 
+gg <- gg + geom_label(aes(x = 0, y = 10, label="y label text"),
+  family = "OpenSans-CondensedLight", size=3.5, 
+  hjust=0, label.size=0, color="#2b2b2b")
+# basic axis scale and breaks
+gg <- gg + scale_x_continuous(expand=c(0,0), breaks = seq(0, 10, by=2), 
+  labels = seq(0, 10, by=2), limits=c(0, 10.2), name = NULL)
+gg <- gg + scale_y_continuous(expand=c(0,0.3), breaks=seq(1, 10, by=1), limits=c(0, 10.2))
+# footnote / caption / subtitle
+caption <- "Note: Vacancies are counted as the number of days between a justice's death, retirement or resignation and the successor justice's swearing in (or commissioning in the case of a recess appointment) as a member of the court.Sources: U.S. Senate, 'Supreme Court Nominations, present-1789'; Supreme Court, 'Members of the Supreme Court of the United States'; Pew Research Center calculations"
+caption  <- paste0(strwrap(caption, 160), sep="", collapse="\n")
+subtitle <- "Here is a subtitle text. It describes what is displayed in the chart. It can mention many important details to under the graphic."
+subtitle  <- paste0(strwrap(subtitle, 160), sep="", collapse="\n") 
+gg <- gg + labs(x=NULL, y=NULL, title="This is a title, choose it wisely",
+subtitle=subtitle, caption=caption)
+#annotations TODO !!!!
+
+qplot(1:10, 1:10, size = 10:1) + xlab("axis x label") + ylab ("y axis label") + theme_swi()
+qplot(mtcars$mpg) + theme_swi()
+
+
+qplot(1:10, 1:10, size = 10:1) + xlab("axis x label") + ylab ("y axis label") + theme_swiYLines()
+qplot(1:10, 1:10, size = 10:1) + xlab("axis x label") + ylab ("y axis label") + theme_swi2()
+ qplot(1:10, 1:10, size = 10:1) + theme_swiMin() + ggtitle("Minimal theme: no axis & no ticks")
+\end{ExampleCode}
+\end{Examples}
+\printindex{}
+\end{document}

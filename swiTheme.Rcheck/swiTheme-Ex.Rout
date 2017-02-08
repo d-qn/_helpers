@@ -1,0 +1,63 @@
+
+R version 3.2.2 (2015-08-14) -- "Fire Safety"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "swiTheme"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('swiTheme')
+Warning: replacing previous import by ‘grid::unit’ when loading ‘swiTheme’
+Warning: replacing previous import by ‘scales::alpha’ when loading ‘swiTheme’
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("colors_swi")
+> ### * colors_swi
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: swi_pal
+> ### Title: swissinfo.ch standard color palette
+> ### Aliases: swi_dpal swi_dpal2 swi_pal swi_rpal swi_spal
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> pie(rep(1,length(swi_pal)), col=swi_pal)
+> pie(rep(1,length(swi_rpal)), col=swi_rpal)
+> pie(rep(1,length(swi_dpal)), col=swi_dpal)
+> pie(rep(1,length(swi_dpal)), col=swi_dpal2)
+> pie(rep(1,length(swi_spal)), col=swi_spal)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("multiplot")
+> ### * multiplot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: multiplot
+> ### Title: Multiple plot function
+> ### Aliases: multiplot
+> 
+> ### ** Examples
+> 
+> q1 <- qplot(1:10, 1:10, size = 10:1) + xlab("axis x label") + ylab ("y axis label") + theme_swi2()
+Error: could not find function "qplot"
+Execution halted

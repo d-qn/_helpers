@@ -9,6 +9,7 @@ Maintainer: Duc-Quang Nguyen <ducquang.nguyen@swssinfo.ch>
 Imports:
     rgdal,
     rgeos,
+    maptools,
     countrycode,
     readxl,
     ggplot2,
@@ -16,3 +17,4 @@ Imports:
     scales
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
+RoxygenNote: 5.0.1

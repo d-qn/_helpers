@@ -1,0 +1,79 @@
+<style>
+body, h1, h2, h3, h4, h5, h6, .descr, td {
+   font-family: 'Open Sans', sans-serif;
+   background-color: white;
+   font-size: 0.8em;
+}
+
+#cite {
+    font-size: 8px; color: #B8B8B8; text-align: right; margin-top:5px; margin-right:5px; padding-bottom: 3px;
+}
+#cite a { text-decoration: none; color: #821122; }
+
+#footer {
+    font-size: 10.5px; color: #9B9B9B;
+    margin-top:8px;
+    background-color: #F6F6F6;
+    padding: 8px;
+}
+#footer a { text-decoration: none; color: #821122; }
+
+.
+
+.descr {
+ font-size: 1.2em;
+ color: #707070;
+ line-height: 120%;
+}
+
+.light {
+ font-size: 0.9em;
+ color: #707070;
+}
+
+
+h1 {
+   font-size:3.3em;
+}
+
+h2 {
+   font-size:2.2em;
+   font-weight: lighter;
+   line-height: 100%;
+}
+
+h3 {
+   font-size:1.5em;
+   color: #696969;
+   line-height: 100%;
+}
+
+h4 {
+   font-size:1.2em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+td, th {
+  border: none;
+  font-size:0.95em;
+}
+
+body {
+  max-width:100%;
+}
+
+a, a:visited {
+  text-decoration: underline;
+}
+</style>

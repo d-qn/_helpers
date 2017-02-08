@@ -1,0 +1,14 @@
+* installing *source* package ‘swiTheme’ ...
+** R
+** preparing package for lazy loading
+Warning: replacing previous import by ‘grid::unit’ when loading ‘swiTheme’
+Warning: replacing previous import by ‘scales::alpha’ when loading ‘swiTheme’
+** help
+Warning: /Users/nguyendu/swissinfo/_helpers/swiTheme.Rcheck/00_pkg_src/swiTheme/man/swiTheme-package.Rd:32: All text must be in a section
+Warning: /Users/nguyendu/swissinfo/_helpers/swiTheme.Rcheck/00_pkg_src/swiTheme/man/swiTheme-package.Rd:33: All text must be in a section
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+Warning: replacing previous import by ‘grid::unit’ when loading ‘swiTheme’
+Warning: replacing previous import by ‘scales::alpha’ when loading ‘swiTheme’
+* DONE (swiTheme)

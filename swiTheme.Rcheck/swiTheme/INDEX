@@ -1,0 +1,6 @@
+multiplot               Multiple plot function
+pdfswi_sq               swissinfo standard chart size pdf export
+swiTheme-package        What the package does (short line) ~~ package
+                        title ~~
+swi_pal                 swissinfo.ch standard color palette
+theme_swi               swissinfo.ch's chart theme

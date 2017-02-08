@@ -1,0 +1,13 @@
+
+.RData
+
+.Rbuildignore
+
+.Rhistory
+.Rproj.user
+
+inst/extdata/countrynames_ordered - countrynames_ordered.csv
+
+.DS_Store
+
+inst/extdata/.~lock.countrynames_ordered.csv#

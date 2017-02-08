@@ -1,0 +1,124 @@
+.axis path, .axis line {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 0px;
+  shape-rendering: crispEdges;
+}
+
+svg text {
+  font: 0.85em 'Open Sans Condensed', sans-serif;
+}
+
+select, option, label {
+  font: 0.95em 'Open Sans Condensed', sans-serif;
+}
+
+.tooltip {
+  font-size: 1.3em;
+  fill: #2F343B;
+  color: white;
+}
+
+
+body, h1, h2, h3, h4, h5, h6, .descr, td {
+   font-family: 'Open Sans Condensed', sans-serif;
+   background-color: white;
+}
+
+#cite {
+    font-size: 0.6em; 
+    color: #B8B8B8; 
+    text-align: left; 
+    margin-top:5px; 
+    margin-right:5px; 
+    padding-bottom: 3px;
+}
+#cite a { text-decoration: none; color: #821122; }
+
+#footer {
+    font-size: 0.75em; color: #9B9B9B; 
+    margin-top:8px;
+    background-color: #F6F6F6;
+    padding: 8px;
+}
+#footer a { text-decoration: none; color: #821122; }
+
+
+.descr {
+  font-size: 1em;
+  color: #707070;
+  line-height: 140%;
+  margin-left:5px;
+  margin-right:6px;
+  margin-bottom:8px;
+}
+
+h1 {
+   font-size:3.3em;
+}
+
+h2 {
+   font-size:1.5em;
+   font-weight: bolder;
+   line-height: 101%;
+   margin-right:5px;
+   margin-bottom:8px;
+   margin-top:5px;
+   margin-left:5px;
+}
+
+h3 {
+   font-size:1.1em;
+   color: #595959;
+   font-weight: bolder;
+   line-height: 100%;
+   margin-left:5px;
+   margin-top:7px;
+}
+
+h4 {
+   font-size:1.5em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+td, th {
+  border: none;
+  font-size:0.95em;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+body {
+  max-width:100%;
+  font-size: 18px;   
+}
+
+a, a:visited {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 15px;
+    }
+    .descr {
+        font-size: 0.8em;
+    }
+}
